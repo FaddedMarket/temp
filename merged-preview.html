@@ -1,0 +1,3103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakura's Hub — merged preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#ff2fd6;--accent-rgb:255,47,214;--purple:#c58aff;--pink:#ff9df0;--bg:#0d0a1a;--muted:#9b93b8;--text:#f5f2ff;--ok:#22c55e;--danger:#ff6677}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--text);min-height:100vh;line-height:1.55;overflow-x:hidden;background:radial-gradient(ellipse at 20% 0%,rgba(var(--accent-rgb),.10),transparent 55%),radial-gradient(ellipse at 80% 10%,rgba(139,92,246,.10),transparent 50%),var(--bg)}
+::selection{background:rgba(var(--accent-rgb),.35)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:#141021}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,rgba(var(--accent-rgb),.6),rgba(139,92,246,.6));border-radius:5px}
+.bg-particle{position:fixed;top:0;z-index:0;pointer-events:none;font-size:18px;text-shadow:0 0 12px rgba(255,0,255,.12);opacity:.25;user-select:none;display:block;will-change:transform,top,left}
+.petal{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;opacity:.5}
+.petal.p1{width:340px;height:340px;top:-90px;left:-70px;background:rgba(var(--accent-rgb),.34)}
+.petal.p2{width:300px;height:300px;top:28%;right:-110px;background:rgba(139,92,246,.36)}
+.petal.p3{width:260px;height:260px;bottom:-70px;left:30%;background:rgba(255,157,240,.22)}
+nav.top{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:flex-start;gap:10px;padding:10px 16px;background:rgba(13,10,26,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.07)}
+.brand{font-size:1.06rem;font-weight:800;letter-spacing:.2px;white-space:nowrap}
+.brand .m{background:linear-gradient(90deg,var(--pink),var(--accent));background-clip:text;-webkit-background-clip:text;color:transparent}
+.nav-links{display:flex;gap:4px;align-items:center;margin-left:auto}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.84rem;font-weight:600;padding:6px 11px;border-radius:999px;transition:all .18s ease}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.nav-links a.active{color:var(--text);background:rgba(var(--accent-rgb),.14)}
+#adultBtn{cursor:pointer;font:inherit;font-size:.84rem;font-weight:700;color:#ffe0f7;background:linear-gradient(135deg,rgba(var(--accent-rgb),.28),rgba(139,92,246,.28));border:1px solid rgba(var(--accent-rgb),.5);border-radius:999px;padding:8px 16px;white-space:nowrap;transition:all .18s ease}
+#adultBtn:hover{background:linear-gradient(135deg,rgba(var(--accent-rgb),.45),rgba(139,92,246,.45));transform:translateY(-1px)}
+#adultBtn.unlocked{box-shadow:0 0 16px rgba(var(--accent-rgb),.35)}
+.hero{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:64px 28px 30px;text-align:center}
+.hero-badge{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--pink);border:1px solid rgba(var(--accent-rgb),.35);background:rgba(var(--accent-rgb),.08);padding:6px 14px;border-radius:999px;margin-bottom:22px}
+.hero-title{font-size:clamp(2.6rem,6vw,4.4rem);font-weight:800;line-height:1.08;letter-spacing:-.5px;background:linear-gradient(90deg,#ffffff,var(--accent) 28%,var(--purple) 55%,var(--pink) 78%,#ffffff);background-clip:text;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 25px rgba(var(--accent-rgb),.35));padding-bottom:6px}
+.hero-sub{max-width:620px;margin:16px auto 24px;color:var(--muted);font-size:.98rem}
+.stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin:8px 0 26px}
+.stat b{display:block;font-size:1.5rem;font-weight:800;color:var(--text)}
+.stat span{font-size:.74rem;color:var(--muted);letter-spacing:.4px;text-transform:uppercase}
+.hero-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:30px}
+.hero-links a,.hero-links button{font:inherit;font-size:.88rem;font-weight:600;cursor:pointer;color:var(--text);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:10px 22px;text-decoration:none;transition:all .18s ease}
+.hero-links a:hover,.hero-links button:hover{border-color:rgba(var(--accent-rgb),.5);background:rgba(var(--accent-rgb),.12);transform:translateY(-1px)}
+.hero-search{max-width:520px;margin:0 auto;position:relative}
+.hero-search input{width:100%;font:inherit;font-size:.92rem;color:var(--text);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:13px 46px 13px 22px;outline:none;transition:all .18s ease}
+.hero-search input::placeholder{color:var(--muted)}
+.hero-search input:focus{border-color:rgba(var(--accent-rgb),.55);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.14);background:rgba(255,255,255,.07)}
+.hero-search .sc{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:.95rem;pointer-events:none}
+.container{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:0 28px 40px}
+.fl-dd-item.nsfw-tab{border:1px solid rgba(var(--accent-rgb),.45)}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:8px 2px 16px}
+.section-head h2{font-size:1.15rem;font-weight:800;letter-spacing:-.2px}
+.section-head .count{font-size:.8rem;color:var(--muted)}
+.section-head .count b{color:var(--pink);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:14px}
+.preset-card{position:relative;display:block;text-decoration:none;color:var(--text);background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:15px 16px 13px 40px;transition:all .18s ease}
+.preset-card:hover{border-color:rgba(var(--accent-rgb),.55);box-shadow:0 6px 24px rgba(0,0,0,.45),0 0 0 1px rgba(var(--accent-rgb),.12);transform:translateY(-2px)}
+.preset-card.preset-avoid{border-color:rgba(255,102,119,.4)}
+.preset-card.preset-avoid:hover{border-color:var(--danger);box-shadow:0 6px 24px rgba(0,0,0,.45),0 0 0 1px rgba(255,102,119,.2)}
+.preset-dot{position:absolute;left:16px;top:22px;width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px rgba(34,197,94,.7)}
+.preset-favicon{width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.08);object-fit:cover;float:left;margin:3px 12px 4px 0}
+.preset-fallback-icon{font-size:1.5rem;line-height:40px;float:left;margin:3px 12px 4px 0}
+.preset-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.preset-name{font-weight:700;font-size:.9rem;word-break:break-word}
+.preset-rank{font-size:.72rem;color:var(--muted);white-space:nowrap}
+.preset-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.preset-meta>span{font-size:.68rem;font-weight:600;padding:2px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);color:var(--muted)}
+.preset-avoid-badge{border-color:rgba(255,102,119,.5)!important;color:#ffb3bd!important;background:rgba(255,102,119,.1)!important}
+.preset-nsfw{border-color:rgba(var(--accent-rgb),.5)!important;color:var(--pink)!important;background:rgba(var(--accent-rgb),.1)!important}
+.preset-pricing{color:#8be9a8!important;border-color:rgba(34,197,94,.35)!important}
+.preset-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;clear:both}
+.preset-tag{font-size:.66rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--muted);border-radius:999px;padding:2px 9px}
+.preset-tag-more{color:var(--pink);border-color:rgba(var(--accent-rgb),.3)}
+.preset-arrow{position:absolute;right:13px;top:22px;font-size:.85rem;color:var(--muted);opacity:0;transition:all .18s ease}
+.preset-card:hover .preset-arrow{opacity:1;color:var(--pink);right:11px}
+.empty{grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--muted);border:1px dashed rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.02)}
+.guide{margin-top:44px;padding-top:30px;border-top:1px solid rgba(255,255,255,.08)}
+.guide h2{font-size:1.25rem;font-weight:800;margin-bottom:16px;letter-spacing:-.2px}
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.guide-card{background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:18px}
+.guide-card h3{font-size:.92rem;font-weight:700;margin-bottom:6px}
+.guide-card p{font-size:.8rem;color:var(--muted)}
+.guide-card .g-emoji{font-size:1.4rem;margin-bottom:8px;display:block}
+.modal-overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(5,3,12,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.modal-overlay.show{display:flex}
+.dialog-box{background:#191230;border:1px solid rgba(var(--accent-rgb),.5);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 40px rgba(var(--accent-rgb),.15);max-width:400px;width:calc(100% - 48px);padding:28px 26px 24px;text-align:center}
+.dialog-box h2{font-size:1.3rem;font-weight:800;margin-bottom:10px}
+.dialog-box p{font-size:.86rem;color:var(--muted);margin-bottom:20px}
+.dialog-actions{display:flex;gap:10px;justify-content:center}
+.dialog-actions button{font:inherit;font-size:.86rem;font-weight:700;cursor:pointer;border-radius:999px;padding:10px 20px;transition:all .16s ease}
+.btn-enter{color:#fff;background:linear-gradient(135deg,var(--accent),rgba(139,92,246,.9));border:1px solid rgba(var(--accent-rgb),.6)}
+.btn-enter:hover{transform:translateY(-1px);box-shadow:0 4px 18px rgba(var(--accent-rgb),.4)}
+.btn-exit{color:var(--muted);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14)}
+.btn-exit:hover{color:var(--text)}
+footer{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:26px 28px 44px;text-align:center;color:var(--muted);font-size:.78rem;border-top:1px solid rgba(255,255,255,.06)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);z-index:120;background:#191230;border:1px solid rgba(var(--accent-rgb),.45);border-radius:999px;padding:10px 20px;font-size:.82rem;color:var(--text);opacity:0;transition:all .3s ease;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.loading{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted)}
+.filter-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 24px}
+.fl-select-wrap{position:relative;flex:1;min-width:170px;max-width:300px}
+.fl-custom-dd{position:relative;width:100%}
+.fl-trigger{width:100%;background:rgba(255,255,255,.05);color:var(--text);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:9px 36px 9px 14px;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:500;cursor:pointer;text-align:left;line-height:1.4;min-height:40px;display:flex;align-items:center;transition:all .18s ease;position:relative;z-index:2;user-select:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fl-custom-dd:hover .fl-trigger{border-color:rgba(var(--accent-rgb),.5)}
+.fl-custom-dd.open .fl-trigger{border-color:rgba(var(--accent-rgb),.55);background:rgba(var(--accent-rgb),.06)}
+.fl-dd-arrow{position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--muted);font-size:.7rem;transition:transform .18s ease;z-index:3}
+.fl-custom-dd.open .fl-dd-arrow{transform:translateY(-50%) rotate(180deg)}
+.fl-dd-menu{position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:999;background:#141123;border:1px solid rgba(var(--accent-rgb),.3);border-radius:12px;margin:0;padding:4px;display:none;box-shadow:0 12px 40px rgba(0,0,0,.6);max-height:320px;overflow-y:auto}
+.fl-custom-dd.open .fl-dd-menu{display:block}
+.fl-dd-item{padding:8px 12px;cursor:pointer;font-family:'Inter',sans-serif;font-size:.8rem;color:var(--text);border-radius:8px;transition:background .15s;display:flex;align-items:center;gap:8px;min-height:34px}
+.fl-dd-item:hover{background:rgba(var(--accent-rgb),.1)}
+.fl-dd-item.selected{background:rgba(var(--accent-rgb),.18);color:#fff}
+.fl-toggle{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.12);border-radius:12px;color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.4px;padding:9px 16px;min-height:40px;white-space:nowrap;flex-shrink:0;transition:all .18s ease}
+.fl-toggle:hover{color:var(--text);border-color:rgba(var(--accent-rgb),.4)}
+.fl-toggle.active{color:#fff;background:rgba(var(--accent-rgb),.2);border-color:rgba(var(--accent-rgb),.55)}
+.fl-toggle.danger.active{color:#ffb3bd;background:rgba(255,102,119,.18);border-color:rgba(255,102,119,.5)}
+.preset-country{border-color:rgba(197,138,255,.4)!important;color:#d7c6ff!important;background:rgba(197,138,255,.08)!important}
+
+/* ---- merged sections (wrap around snippet roots) ---- */
+.app-section{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:36px 28px 56px;border-top:1px solid rgba(255,255,255,.06)}
+.app-h2{font-size:1.25rem;font-weight:800;letter-spacing:-.2px;margin-bottom:4px}
+.app-sub{font-size:.8rem;color:var(--muted);margin:0 0 20px}
+
+/* Sakura's Suit — restyled to the target dark-glassmorphism design system.
+   Target tokens: --accent:#ff2fd6, --accent-rgb:255,47,214, --purple:#c58aff,
+   --pink:#ff9df0, --bg:#0d0a1a, --muted:#9b93b8, --text:#f5f2ff, --ok:#22c55e,
+   --danger:#ff6677. Font is Inter (loaded by the target page). */
+:root {
+  --danger-rgb: 255, 102, 119;
+  --suit-surface: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  --suit-border: rgba(255,255,255,.09);
+  --suit-input-bg: rgba(255,255,255,.05);
+  --suit-input-border: rgba(255,255,255,.12);
+  --suit-vweak: var(--danger);
+  --suit-weak: #ffb454;
+  --suit-fair: #ffd32a;
+  --suit-good: var(--ok);
+  --suit-strong: var(--purple);
+}
+
+@media (max-width: 640px) {
+  .suit-embed { min-height: calc(100dvh - 160px); }
+  .suit-tabbar { padding: 5px 10px; gap: 4px; }
+  .suit-tab-btn { font-size: 10px; padding: 4px 10px; min-height: 28px; gap: 3px; }
+  .suit-chip { font-size: 10px; padding: 7px 12px; min-height: 36px; }
+  .suit-btn { font-size: 11px; padding: 10px 18px; min-height: 42px; }
+  .suit-btn-sm { font-size: 10px; padding: 7px 12px; min-height: 36px; }
+  .suit-btn-ghost { font-size: 10px; padding: 7px 12px; min-height: 36px; }
+  .suit-input { font-size: 12px; padding: 6px 8px; min-height: 32px; }
+  .suit-input[type=number] { width: 60px; font-size: 14px; }
+  .suit-prov-btn { font-size: 10px; padding: 5px 10px; min-height: 34px; }
+  .suit-listbox { font-size: 12px; max-height: 160px; }
+  .suit-listbox-item { font-size: 11px; padding: 6px 8px; min-height: 32px; }
+  .suit-inbox-wrap { max-height: 160px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .suit-inbox-table { font-size: 0.75rem; }
+  .suit-inbox-table th { font-size: 9px; padding: 6px 8px; }
+  .suit-inbox-table td { font-size: 11px; padding: 8px; min-height: 38px; }
+  .suit-vault-lock { min-height: 200px; padding: 14px; }
+  .suit-vault-file-bar { max-width: 100%; padding: 8px 12px; }
+  .suit-vault-detail { padding: 12px; }
+  .suit-cat-btn { font-size: 10px; padding: 6px 12px; min-height: 36px; }
+  .suit-detail-val { font-size: 12px; word-break: break-all; }
+  .suit-modal { padding: 20px 14px; margin: 10px; }
+  .suit-modal h3 { font-size: 15px; }
+  .suit-section-lbl { font-size: 10px; }
+  .suit-strength-lbl { font-size: 11px; min-width: 80px; }
+  .suit-strength-track { min-width: 60px; }
+  .suit-email-addr-row input { min-width: 80px; }
+  .suit-provider-bar { padding: 6px 10px; gap: 4px; }
+  .suit-hr { margin: 4px 0 0; }
+  .suit-vault-toolbar { padding: 8px 10px; gap: 6px; }
+  .suit-vault-toolbar input { min-width: 80px; }
+  .suit-msg-body { font-size: 11px; padding: 10px; }
+  .suit-status-bar { font-size: 11px; padding: 5px 10px; }
+  .suit-act-row { gap: 6px; }
+  .suit-spin-group { gap: 10px; }
+  .suit-sub-tabbar { gap: 4px; }
+  .suit-radio-item { font-size: 11px; min-height: 28px; }
+}
+
+/* ── Suite embed styles ── */
+.suit-embed { min-height: calc(100vh - 160px); display: flex; flex-direction: column; }
+.suit-panel .suit-results { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.suit-panel .suit-results .suit-listbox { flex: 1; max-height: none; min-height: 100px; }
+.vault-main { flex: 1; }
+
+/* Standalone panel visibility (the target page may not style .panel) */
+.suit-panel { display: none; }
+.suit-panel.active { display: block; }
+
+.suit-tabbar { display: flex; align-items: center; gap: 5px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 6px 12px; background: rgba(17, 15, 28, 0.45); backdrop-filter: blur(18px) saturate(1.5); -webkit-backdrop-filter: blur(18px) saturate(1.5); border: 1px solid var(--suit-border); border-radius: 999px; overscroll-behavior: contain; margin-bottom: 12px; }
+.suit-tab-btn { background: rgba(var(--accent-rgb), 0.06); color: var(--pink); border: 1px solid transparent; padding: 6px 14px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; transition: all .28s; white-space: nowrap; flex-shrink: 0; min-height: 34px; border-radius: 999px; display: flex; align-items: center; gap: 5px; opacity: 0.7; }
+.suit-tab-btn:hover { background: rgba(var(--accent-rgb), 0.12); border-color: rgba(var(--accent-rgb), 0.15); color: var(--text); opacity: 1; }
+.suit-tab-btn.active { background: rgba(var(--accent-rgb), 0.18); color: var(--text); border-color: rgba(var(--accent-rgb), 0.35); opacity: 1; box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.12); }
+
+.suit-section-lbl { display: flex; align-items: center; gap: 8px; margin: 10px 0 5px; font-family: 'Inter', sans-serif; font-size: 11px; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; }
+.suit-section-lbl::after { content: ''; flex: 1; height: 1px; background: var(--accent); opacity: .4; }
+
+.suit-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.suit-chip-label { display: flex; align-items: center; cursor: pointer; }
+.suit-chip-label input { display: none; }
+.suit-chip { padding: 9px 16px; background: rgba(var(--accent-rgb), 0.06); border: 1px solid transparent; color: var(--pink); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 11px; cursor: pointer; transition: all .25s; user-select: none; min-height: 42px; display: flex; align-items: center; border-radius: 999px; }
+.suit-chip-label input:checked + .suit-chip { background: rgba(var(--accent-rgb), 0.18); color: var(--text); border-color: rgba(var(--accent-rgb), 0.35); box-shadow: 0 3px 14px rgba(var(--accent-rgb), 0.3); }
+.suit-chip-label:hover .suit-chip { border-color: rgba(var(--accent-rgb), 0.25); color: var(--text); }
+
+.suit-input { background: var(--suit-input-bg); color: var(--text); border: 1px solid var(--suit-input-border); padding: 8px 10px; font-family: 'Inter', sans-serif; font-size: 13px; outline: none; transition: all .2s; width: 100%; min-height: 36px; border-radius: 10px; -webkit-appearance: none; }
+.suit-input:focus { border-color: var(--accent); background: rgba(var(--accent-rgb), 0.05); box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.10); }
+.suit-input[type=number] { -moz-appearance: textfield; width: 80px; text-align: center; font-size: 16px; font-weight: 700; color: var(--accent); padding: 6px; min-height: 36px; }
+
+.suit-btn { padding: 12px 24px; border: 1px solid transparent; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: .5px; background: rgba(var(--accent-rgb), 0.10); color: var(--pink); min-height: 48px; -webkit-appearance: none; border-radius: 999px; text-transform: uppercase; transition: all .25s; }
+.suit-btn:hover { background: rgba(var(--accent-rgb), 0.18); border-color: rgba(var(--accent-rgb), 0.30); transform: translateY(-1px); }
+.suit-btn-sm { padding: 9px 16px; font-size: 11px; border: 1px solid transparent; background: rgba(var(--accent-rgb), 0.10); color: var(--pink); cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: .3px; min-height: 40px; -webkit-appearance: none; border-radius: 999px; text-transform: uppercase; transition: all .25s; }
+.suit-btn-sm:hover { background: rgba(var(--accent-rgb), 0.18); border-color: rgba(var(--accent-rgb), 0.30); transform: translateY(-1px); }
+.suit-btn-ghost { background: rgba(var(--accent-rgb), 0.04); border: 1px solid transparent; color: var(--muted); padding: 9px 16px; font-size: 11px; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: .3px; min-height: 40px; -webkit-appearance: none; border-radius: 999px; text-transform: uppercase; transition: all .25s; }
+.suit-btn-ghost:hover { background: rgba(var(--accent-rgb), 0.10); border-color: rgba(var(--accent-rgb), 0.20); color: var(--text); }
+
+.suit-listbox { background: rgba(var(--accent-rgb), 0.03); border: 1px solid rgba(var(--accent-rgb), 0.10); overflow-y: auto; max-height: 220px; font-family: 'Inter', sans-serif; font-size: 13px; border-radius: 14px; }
+.suit-listbox-item { padding: 8px 10px; color: var(--accent); cursor: pointer; border-bottom: 1px solid var(--suit-border); min-height: 36px; display: flex; align-items: center; font-family: 'Inter', sans-serif; font-size: 12px; }
+.suit-listbox-item:hover { background: rgba(var(--accent-rgb), 0.1); }
+
+.suit-strength-row { display: flex; align-items: center; gap: 14px; margin: 10px 0; flex-wrap: wrap; }
+.suit-strength-lbl { font-size: 13px; font-weight: 600; min-width: 140px; }
+.suit-strength-track { flex: 1; min-width: 120px; height: 7px; background: var(--suit-border); position: relative; overflow: hidden; border-radius: 999px; }
+.suit-strength-fill { height: 100%; width: 0; transition: width .3s, background .3s; border-radius: 999px; }
+
+.suit-act-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+
+.suit-spin-group { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
+.suit-spin-box { display: flex; flex-direction: column; gap: 4px; }
+.suit-spin-box label { font-size: 12px; color: var(--muted); font-family: 'Inter', sans-serif; }
+
+.suit-provider-bar { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; background: var(--suit-surface); border: 1px solid var(--suit-border); padding: 8px 12px; margin-bottom: 12px; border-radius: 18px; }
+.suit-prov-btn { padding: 7px 14px; font-size: 11px; background: rgba(var(--accent-rgb), 0.06); border: 1px solid transparent; color: var(--pink); cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; transition: all .25s; min-height: 38px; border-radius: 999px; text-transform: uppercase; letter-spacing: .5px; }
+.suit-prov-btn:hover { background: rgba(var(--accent-rgb), 0.12); border-color: rgba(var(--accent-rgb), 0.20); color: var(--text); }
+.suit-prov-btn.active { background: rgba(var(--accent-rgb), 0.18); border-color: rgba(var(--accent-rgb), 0.35); color: var(--text); box-shadow: 0 3px 14px rgba(var(--accent-rgb), 0.30); }
+
+.suit-status-bar { background: var(--suit-surface); color: var(--muted); font-size: 12px; padding: 6px 12px; margin: 6px 0; font-family: 'Inter', sans-serif; border-radius: 10px; }
+.suit-inbox-wrap { overflow: auto; max-height: 200px; border: 1px solid var(--suit-border); border-radius: 14px; }
+.suit-inbox-table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; }
+.suit-inbox-table th { background: rgba(var(--accent-rgb), 0.08); color: var(--pink); font-size: 10px; text-align: left; padding: 8px 10px; letter-spacing: 1.5px; text-transform: uppercase; font-family: 'Inter', sans-serif; }
+.suit-inbox-table td { padding: 10px; font-size: 13px; border-bottom: 1px solid var(--suit-border); cursor: pointer; min-height: 44px; }
+.suit-inbox-table tr:hover td { background: rgba(var(--accent-rgb), 0.07); }
+.suit-msg-body { background: rgba(0,0,0,0.2); border: 1px solid var(--suit-border); padding: 12px; font-family: 'Inter', sans-serif; font-size: 12px; white-space: pre-wrap; max-height: 160px; overflow-y: auto; color: var(--muted); margin-top: 6px; border-radius: 14px; }
+
+.suit-vault-lock { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 300px; gap: 14px; padding: 20px; }
+.suit-vault-file-bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; background: var(--suit-surface); border: 1px solid var(--suit-border); padding: 10px 14px; margin-bottom: 12px; border-radius: 18px; width: 100%; max-width: 380px; flex-direction: column; }
+.suit-vault-sidebar { width: 100%; background: var(--suit-surface); border-bottom: 1px solid var(--suit-border); padding: 6px 0; display: flex; flex-wrap: nowrap; overflow-x: auto; flex-shrink: 0; }
+.suit-vault-sidebar::-webkit-scrollbar { display: none; }
+.suit-cat-btn { white-space: nowrap; flex-shrink: 0; padding: 8px 16px; background: rgba(var(--accent-rgb), 0.06); border: 1px solid rgba(var(--accent-rgb), 0.12); color: var(--muted); cursor: pointer; font-family: 'Inter', sans-serif; font-size: 11px; transition: all .18s; min-height: 40px; border-radius: 999px; margin: 2px 4px; letter-spacing: .3px; }
+.suit-cat-btn:hover { background: rgba(var(--accent-rgb), 0.10); color: var(--text); }
+.suit-cat-btn.active { background: rgba(var(--accent-rgb), 0.22); color: var(--pink); box-shadow: 0 2px 10px rgba(var(--accent-rgb), 0.3); border-color: rgba(var(--accent-rgb), 0.5); }
+.suit-vault-toolbar { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--suit-border); flex-wrap: wrap; background: rgba(var(--accent-rgb), 0.04); }
+.suit-vault-toolbar input { flex: 1; min-width: 140px; }
+.suit-vault-detail { background: rgba(var(--accent-rgb), 0.04); border-top: 1px solid var(--suit-border); padding: 16px; overflow-y: auto; }
+.suit-detail-row { margin-bottom: 12px; }
+.suit-detail-label { font-size: 10px; color: var(--pink); letter-spacing: 1.5px; font-family: 'Inter', sans-serif; margin-bottom: 3px; text-transform: uppercase; }
+.suit-detail-val { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--text); word-break: break-all; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
+.suit-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 1000; align-items: center; justify-content: center; }
+.suit-modal-overlay.open { display: flex; }
+.suit-modal { background: var(--bg); border: 1px solid var(--suit-border); padding: 32px 28px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; border-radius: 22px; }
+.suit-modal h3 { font-size: 17px; color: var(--accent); margin-bottom: 16px; font-family: 'Inter', sans-serif; font-weight: 800; }
+.suit-form-row { margin-bottom: 12px; }
+.suit-form-row label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; font-family: 'Inter', sans-serif; }
+.suit-modal-btns { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+
+.suit-email-addr-row { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
+.suit-email-addr-row input { flex: 1; min-width: 140px; }
+.suit-sub-tabbar { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+.suit-radio-group { display: flex; flex-direction: column; gap: 6px; }
+.suit-radio-item { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 12px; color: var(--text); min-height: 30px; font-family: 'Inter', sans-serif; }
+.suit-radio-item input[type=checkbox] { accent-color: var(--accent); cursor: pointer; width: 18px; height: 18px; }
+.suit-radio-item input[type=radio] { accent-color: var(--accent); cursor: pointer; width: 18px; height: 18px; }
+
+.suit-hr { height: 1px; background: var(--suit-border); margin: 6px 0 0; }
+
+@media (min-width: 640px) {
+  .suit-header { padding: 14px 24px 0; }
+  .suit-tabbar { padding: 10px 24px 0; flex-wrap: wrap; overflow: visible; }
+  .suit-embed .panels { padding: 0 24px 20px; }
+  .suit-vault-main { flex-direction: row; display: flex; }
+  .suit-vault-sidebar { width: 160px; flex-direction: column; border-bottom: none; border-right: 1px solid var(--suit-border); overflow-x: visible; }
+  .suit-vault-detail { border-top: none; border-left: 1px solid var(--suit-border); width: 280px; flex-shrink: 0; }
+}
+
+/* Suit toast (scoped by id so it cannot collide with the target page's own toast) */
+#suit-toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(16px); background: var(--suit-surface); color: var(--text); padding: 14px 26px; font-weight: 600; font-size: .76rem; opacity: 0; transition: all .35s; pointer-events: none; z-index: 9999; font-family: 'Inter', sans-serif; letter-spacing: 0.5px; white-space: nowrap; max-width: 90vw; text-align: center; border-radius: 999px; border: 1px solid var(--suit-border); }
+#suit-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Bulk email progress bar (moved out of the inline <style> ROOT embedded in HTML) */
+#suit-bulk-progress { -webkit-appearance: none; appearance: none; border: none; background: rgba(255,255,255,.06); border-radius: 999px; height: 6px; width: 100%; }
+#suit-bulk-progress::-webkit-progress-bar { background: rgba(255,255,255,.06); border-radius: 999px; }
+#suit-bulk-progress::-webkit-progress-value { background: var(--accent); border-radius: 999px; }
+#suit-bulk-progress::-moz-progress-bar { background: var(--accent); border-radius: 999px; }
+
+#guides.helpful-page { max-width: 100%; margin: 0 auto; padding: 8px 0; }
+#guides.helpful-page h2 { font-family: 'Inter', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--text); margin-bottom: 4px; letter-spacing: -0.3px; }
+.helpful-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 24px; }
+
+.welcome-hero { text-align: center; padding: 40px 20px 28px; }
+.welcome-icon {
+  font-size: 2.6rem; line-height: 1; margin-bottom: 14px;
+  color: var(--accent);
+  filter: drop-shadow(0 0 24px rgba(var(--accent-rgb), 0.30));
+  animation: welcomePulse 3s ease-in-out infinite;
+}
+@keyframes welcomePulse {
+  0%, 100% { transform: scale(1); opacity: .7; }
+  50% { transform: scale(1.06); opacity: 1; }
+}
+.welcome-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 800; color: var(--text); letter-spacing: -0.5px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #fff 0%, var(--accent) 40%, var(--purple) 60%, #fff 80%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: heroShine 6s ease-in-out infinite alternate;
+}
+@keyframes heroShine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.welcome-sub {
+  font-size: 0.85rem; color: var(--muted); line-height: 1.5;
+  max-width: 480px; margin: 0 auto;
+}
+
+.helpful-section-hdr {
+  font-size: 0.75rem; color: var(--accent); margin: 24px 0 14px;
+  letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; opacity: 0.85;
+  display: flex; align-items: center; gap: 10px;
+}
+.helpful-section-hdr::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.25), transparent);
+}
+.helpful-section-hdr:first-of-type { margin-top: 0; }
+
+.helpful-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.helpful-entry {
+  background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: border-color .25s, box-shadow .25s, transform .25s;
+}
+.helpful-entry:hover {
+  border-color: rgba(var(--accent-rgb), 0.35);
+  box-shadow: 0 0 24px rgba(var(--accent-rgb), 0.10);
+  transform: translateY(-2px);
+}
+
+.helpful-entry-head {
+  display: flex; align-items: center; gap: 12px; padding: 16px 16px 10px;
+}
+.helpful-entry-icon {
+  font-size: 2.2rem; line-height: 1;
+  width: 52px; height: 52px; min-width: 52px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.09);
+  display: flex; align-items: center; justify-content: center;
+}
+.helpful-entry-meta { flex: 1; min-width: 0; }
+.helpful-entry-title {
+  font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 800;
+  color: var(--text); line-height: 1.25; letter-spacing: -0.2px;
+}
+.helpful-entry-body {
+  padding: 0 16px 16px 16px;
+  font-size: 0.845rem; line-height: 1.75; color: var(--muted);
+}
+.helpful-entry-body a {
+  color: var(--purple); text-decoration: none;
+  border-bottom: 1px solid rgba(197, 138, 255, 0.25);
+  transition: border-color .18s, color .18s; font-weight: 500;
+}
+.helpful-entry-body a::after { content: ' ↗'; font-size: 0.7em; opacity: 0.45; transition: opacity .18s; }
+.helpful-entry-body a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.helpful-entry-body a:hover::after { opacity: 1; }
+
+@media (max-width: 640px) {
+  .welcome-hero { padding: 28px 12px 20px; }
+  .helpful-entry-head { padding: 12px 14px 8px; }
+}
+
+/* ---- view switching ---- */
+.view{display:none}
+.view.show{display:block}
+/* ---- nav dropdowns ---- */
+.nav-dd{flex:0 1 auto;min-width:0;max-width:200px}
+.nav-dd .fl-trigger{font-size:.78rem;padding:6px 30px 6px 12px;min-height:34px;border-radius:999px}
+.nav-dd .fl-dd-menu{min-width:240px;width:max-content;max-width:340px}
+.nav-dd-country .fl-dd-menu{left:0;right:auto}
+.nav-dd-cat .fl-dd-menu{left:auto;right:0}
+.nav-dd-cat .fl-dd-item .cnt{margin-left:auto;font-size:.7rem;opacity:.6}
+@media (max-width:820px){
+  nav.top{flex-wrap:wrap;gap:10px;padding:12px 16px;justify-content:center}
+  .nav-dd{max-width:170px}
+  .nav-links{flex-wrap:wrap;justify-content:center;width:100%}
+}
+#script-hub {
+  --accent-text: #ff88ff;
+  --success: #4cd989;
+  --surface: #151225;
+  --radius: 9px;
+  --radius-lg: 13px;
+  --border: rgba(255,0,255,0.12);
+  --border-hover: rgba(255,0,255,0.40);
+  --muted2: #524d66;
+}
+#script-hub.script-page { max-width: 100%; margin: 0 auto; padding: 8px 0; }
+#script-hub h2 { font-family: 'Syne', 'Inter', sans-serif; font-size: 1.4rem; font-weight: 900; color: #fff; margin-bottom: 2px; letter-spacing: -0.5px; }
+#script-hub .script-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 18px; line-height: 1.5; }
+#script-hub .script-code-block { position: relative; background: #0a0a14; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 16px; margin-bottom: 24px; overflow-x: auto; }
+#script-hub .script-code-block pre { margin: 0; font-family: 'Inter', sans-serif; font-size: 0.78rem; line-height: 1.65; color: var(--text); white-space: pre-wrap; word-break: break-word; }
+#script-hub .script-code-block .copy-btn { position: absolute; top: 10px; right: 10px; background: rgba(var(--accent-rgb), 0.1); border: 1px solid rgba(var(--accent-rgb), 0.2); color: var(--accent-text); padding: 5px 12px; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 600; border-radius: 6px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+#script-hub .script-code-block .copy-btn:hover { background: rgba(var(--accent-rgb), 0.2); }
+#script-hub .script-code-block .copy-btn.copied { background: rgba(76,217,137,0.2); border-color: var(--success); color: var(--success); }
+#script-hub .script-code-block .dl-btn { position: absolute; top: 10px; right: 62px; background: rgba(var(--accent-rgb), 0.1); border: 1px solid rgba(var(--accent-rgb), 0.2); color: var(--accent-text); padding: 5px 12px; font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 600; border-radius: 6px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+#script-hub .script-code-block .dl-btn:hover { background: rgba(var(--accent-rgb), 0.2); }
+#script-hub .script-games { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; margin-top: 12px; }
+@media (min-width: 641px) { #script-hub .script-games { grid-template-columns: repeat(2, 1fr); } }
+#script-hub .script-game-card {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 12px 14px;
+  background: rgba(17, 15, 28, 0.55);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color .2s, background .2s, transform .2s;
+}
+#script-hub .script-game-card:hover { background: rgba(17, 15, 28, 0.85); border-color: rgba(var(--accent-rgb), 0.25); transform: translateY(-1px); }
+#script-hub .script-game-card .sg-name { font-size: 0.8rem; color: var(--text); font-weight: 600; min-width: 0; }
+#script-hub .script-game-card .sg-name a { color: var(--accent-text); text-decoration: none; }
+#script-hub .script-game-card .sg-name a:hover { text-decoration: underline; }
+#script-hub .script-game-card .sg-status { font-size: 0.68rem; font-weight: 600; white-space: nowrap; }
+#script-hub .exe-chip { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; color: #fff; margin-left: 6px; vertical-align: middle; }
+#script-hub .exe-chip-pc { background: #2563eb; }
+#script-hub .exe-chip-android { background: #16a34a; }
+#script-hub .exe-chip-ios { background: #dc2626; }
+#script-hub .exe-chip-other { background: #6b7280; }
+#script-hub .script-status-hdr { font-size: 0.75rem; color: var(--accent-text); margin: 20px 0 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; opacity: 0.85; }
+#script-hub .script-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+#script-hub .sl-badge { display: inline-flex; align-items: center; gap: 5px; padding: 6px 14px; border-radius: 999px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.3px; background: var(--surface); border: 1px solid var(--border); }
+#script-hub .sl-badge.sl-fully { border-color: rgba(76,217,137,0.3); background: rgba(76,217,137,0.08); color: #4cd989; }
+#script-hub .sl-badge.sl-partial { border-color: rgba(255,211,42,0.3); background: rgba(255,211,42,0.08); color: #ffd32a; }
+#script-hub .sl-badge.sl-broken { border-color: rgba(255,71,87,0.3); background: rgba(255,71,87,0.08); color: #ff4757; }
+#script-hub .sl-badge.sl-coming { border-color: rgba(139,92,246,0.3); background: rgba(139,92,246,0.08); color: #a78bfa; }
+#script-hub .sl-badge.sl-discontinued { border-color: rgba(160,160,160,0.3); background: rgba(160,160,160,0.08); color: #a0a0a0; }
+
+/* ── Features accordion ── */
+#script-hub .sf-accordion { display: flex; flex-direction: column; gap: 8px; }
+#script-hub .sf-acc-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 12px 16px; cursor: pointer; user-select: none;
+  background: rgba(17, 15, 28, 0.7); border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  font-family: 'Syne', 'Inter', sans-serif; font-size: 0.85rem; font-weight: 800;
+  color: #fff; letter-spacing: -0.2px;
+}
+#script-hub .sf-acc-header:hover { border-color: var(--border-hover); background: rgba(17, 15, 28, 0.9); }
+#script-hub .sf-acc-header .sf-acc-arrow {
+  font-size: 0.75rem; color: var(--muted);
+  transition: transform .25s ease; flex-shrink: 0;
+}
+#script-hub .sf-acc-header.open .sf-acc-arrow { transform: rotate(180deg); }
+#script-hub .sf-acc-header .sf-acc-count {
+  font-size: 0.6rem; color: var(--muted2); font-family: 'Inter', sans-serif;
+  font-weight: 600; letter-spacing: 0.5px; margin-left: auto;
+}
+#script-hub .sf-acc-body {
+  max-height: 0; overflow: hidden; overflow-anchor: none;
+  transition: max-height .4s ease, padding .4s ease, opacity .3s ease;
+  padding: 0 0 4px; opacity: 0;
+}
+#script-hub .sf-acc-body.open {
+  max-height: 3500px; padding: 10px 0 4px; opacity: 1;
+}
+#script-hub .sf-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px;
+}
+#script-hub .sf-card {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 10px 12px; border-radius: var(--radius);
+  background: rgba(var(--accent-rgb), 0.03); border: 1px solid rgba(var(--accent-rgb), 0.06);
+  transition: background .2s, border-color .2s;
+}
+#script-hub .sf-card:hover { background: rgba(var(--accent-rgb), 0.06); border-color: rgba(var(--accent-rgb), 0.12); }
+#script-hub .sf-card-top { display: flex; align-items: center; gap: 7px; }
+#script-hub .sf-card-icon {
+  width: 20px; height: 20px; min-width: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; line-height: 1;
+}
+#script-hub .sf-card-title {
+  font-size: 0.78rem; font-weight: 700; color: #fff;
+  letter-spacing: 0.2px; line-height: 1.3;
+}
+#script-hub .sf-card-desc {
+  font-size: 0.7rem; color: rgba(226,221,242,0.6);
+  line-height: 1.45; padding-left: 27px;
+}
+@media (min-width: 641px) {
+  #script-hub .sf-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+#script-hub .cl-entry { padding: 10px 0 10px 14px; border-left: 2px solid rgba(var(--accent-rgb), 0.15); margin-bottom: 14px; }
+#script-hub .cl-entry:hover { border-left-color: rgba(var(--accent-rgb), 0.4); }
+#script-hub .cl-version { font-size: 0.82rem; font-weight: 700; color: #fff; }
+#script-hub .cl-date { font-size: 0.6rem; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.8px; margin: 2px 0 6px; }
+#script-hub .cl-changes { margin: 0; padding-left: 16px; }
+#script-hub .cl-changes li { font-size: 0.8rem; line-height: 1.7; color: rgba(226,221,242,0.72); }
+
+/* ── Sub-tabbar (renamed from .tabbar/.tab-btn to avoid collision with target page) ── */
+#script-hub .script-tabbar {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  overflow: hidden;
+  padding: 6px 10px;
+  background: rgba(17, 15, 28, 0.45);
+  backdrop-filter: blur(18px) saturate(1.5);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  margin-bottom: 14px;
+}
+#script-hub .script-tab-btn {
+  background: rgba(var(--accent-rgb), 0.06);
+  color: var(--accent-text);
+  border: 1px solid transparent;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all .2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 32px;
+  opacity: 0.7;
+}
+#script-hub .script-tab-btn:hover {
+  background: rgba(var(--accent-rgb), 0.12);
+  border-color: rgba(var(--accent-rgb), 0.15);
+  opacity: 1;
+}
+#script-hub .script-tab-btn.active {
+  background: rgba(var(--accent-rgb), 0.18);
+  border-color: rgba(var(--accent-rgb), 0.35);
+  color: #fff;
+  opacity: 1;
+  box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.12);
+}
+
+/* ── Game search input ── */
+#script-hub .script-search {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 12px;
+  padding: 9px 12px;
+  background: rgba(17, 15, 28, 0.55);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  outline: none;
+  transition: border-color .2s;
+}
+#script-hub .script-search:focus { border-color: rgba(var(--accent-rgb), 0.4); }
+#script-hub .script-search::placeholder { color: var(--muted2); }
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  #script-hub .script-tab-btn { font-size: 10px; padding: 4px 10px; min-height: 28px; gap: 3px; }
+  #script-hub .script-tabbar { padding: 5px 10px; gap: 4px; }
+  #script-hub .script-code-block { padding: 14px 12px; margin-bottom: 18px; }
+  #script-hub .script-game-card { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 12px; }
+  #script-hub .script-game-card .sg-status { align-self: flex-end; }
+}
+</style>
+</head>
+<body>
+<div class="petal p1"></div>
+<div class="petal p2"></div>
+<div class="petal p3"></div>
+
+<nav class="top">
+  <div class="fl-select-wrap nav-dd nav-dd-country">
+    <div class="fl-custom-dd" id="flCountry">
+      <div class="fl-trigger" id="countryTrigger">🌍 All Countries</div>
+      <span class="fl-dd-arrow">▾</span>
+      <div class="fl-dd-menu" id="countryMenu"></div>
+    </div>
+  </div>
+  <div class="brand">🌸 <span class="m">Sakura's Hub</span></div>
+  <div class="fl-select-wrap nav-dd nav-dd-cat">
+    <div class="fl-custom-dd" id="navCatDd">
+      <div class="fl-trigger" id="catTrigger">🗂️ All Categories</div>
+      <span class="fl-dd-arrow">▾</span>
+      <div class="fl-dd-menu" id="catMenu"></div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#directory" class="active" data-view="directory">Directory</a>
+    <a href="#suit" data-view="suit">Suit</a>
+    <a href="#script-hub" data-view="script-hub">Script Hub</a>
+    <a href="#guides" data-view="guides">Guides</a>
+    <button id="adultBtn" type="button">🔞 18+</button>
+  </div>
+</nav>
+
+<div class="view show" id="view-directory">
+<header class="hero">
+  <span class="hero-badge">One clean directory</span>
+  <h1 class="hero-title">Sakura's <span>Hub</span></h1>
+  <p class="hero-sub">A curated directory of free streaming, reading, gaming and privacy tools. Everything is free to use, and adult content stays hidden behind the 🔞 button until you confirm.</p>
+  <div class="stats" id="stats">
+    <div class="stat"><b id="stSites">…</b><span>Sites</span></div>
+    <div class="stat"><b id="stCats">…</b><span>Categories</span></div>
+    <div class="stat"><b>100%</b><span>Free</span></div>
+  </div>
+  <div class="hero-links">
+    <a href="#directory" data-view="directory">Browse the directory ↓</a>
+    <a href="#guides" data-view="guides">Guides</a>
+  </div>
+  <div class="hero-search">
+    <input type="text" id="searchInput" placeholder="Search sites…" autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="sc">🔍</span>
+  </div>
+</header>
+
+<main class="container" id="directory">
+  <div class="filter-bar" id="filterBar">
+    <button class="fl-toggle" id="avoidToggle" type="button">🚫 Avoid</button>
+    <button class="fl-toggle danger" id="nsfwToggle" type="button">🔞 NSFW</button>
+  </div>
+  <div id="grid"></div>
+
+</main>
+</div><!-- /view-directory -->
+
+<div class="view" id="view-suit">
+<section id="suit" class="app-section">
+  <h2 class="app-h2">🧰 Sakura&apos;s Suit</h2>
+  <p class="app-sub">Passwords, usernames, disposable emails and a vault &mdash; one toolbox.</p>
+<div id="suit-root">
+  <div class="suit-tabbar" style="margin-bottom:16px;">
+    <button class="suit-tab-btn active" data-suit-action="tab" data-suit-tab="passwords">🔐 Passwords</button>
+    <button class="suit-tab-btn" data-suit-action="tab" data-suit-tab="usernames">👤 Usernames</button>
+    <button class="suit-tab-btn" data-suit-action="tab" data-suit-tab="pins">🔢 PINs</button>
+    <button class="suit-tab-btn" data-suit-action="tab" data-suit-tab="email">📧 Email</button>
+    <button class="suit-tab-btn" data-suit-action="tab" data-suit-tab="vault">🗄️ Vault</button>
+  </div>
+
+  <div class="suit-panel panel active" id="suit-panel-passwords">
+    <div class="suit-pw-top" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+      <label class="suit-radio-item" style="min-height:0;gap:4px;"><input type="radio" name="suit-pw-mode" value="random" checked> Random</label>
+      <label class="suit-radio-item" style="min-height:0;gap:4px;"><input type="radio" name="suit-pw-mode" value="passphrase"> Passphrase</label>
+      <button class="suit-btn" data-suit-action="gen-passwords" style="margin-left:auto;min-height:34px;padding:6px 16px;font-size:13px;">🎲 Generate</button>
+    </div>
+    <div id="suit-pw-random-settings">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:4px;">
+        <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Len <input type="number" id="suit-pw-length" value="16" min="1" max="256" class="suit-input" style="width:55px;min-height:30px;font-size:13px;padding:4px;"></label>
+        <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Cnt <input type="number" id="suit-pw-count" value="5" min="1" max="200" class="suit-input" style="width:50px;min-height:30px;font-size:13px;padding:4px;"></label>
+        <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Min# <input type="number" id="suit-pw-mindigits" value="0" min="0" max="20" class="suit-input" style="width:45px;min-height:30px;font-size:13px;padding:4px;"></label>
+        <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Min$ <input type="number" id="suit-pw-minsymbols" value="0" min="0" max="20" class="suit-input" style="width:45px;min-height:30px;font-size:13px;padding:4px;"></label>
+      </div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin-bottom:4px;">
+        <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-pw-upper" checked> A–Z</label>
+        <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-pw-lower" checked> a–z</label>
+        <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-pw-digits" checked> 0–9</label>
+        <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-pw-symbols" checked> Symbols</label>
+        <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-pw-noambig"> No 0O1l</label>
+        <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-pw-norepeat"> NoRpt</label>
+        <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-pw-startletter"> Ltr</label>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:6px;">
+        <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Prefix <input type="text" id="suit-pw-prefix" class="suit-input" placeholder="pre" style="width:65px;min-height:30px;font-size:12px;padding:4px;"></label>
+        <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Suffix <input type="text" id="suit-pw-suffix" class="suit-input" placeholder="suf" style="width:65px;min-height:30px;font-size:12px;padding:4px;"></label>
+        <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Exclude <input type="text" id="suit-pw-exclude" class="suit-input" placeholder="@#$" style="width:70px;min-height:30px;font-size:12px;padding:4px;"></label>
+        <select id="suit-pw-category" class="suit-input" style="width:auto;min-height:30px;font-size:12px;padding:4px;"><option value="">Cat: None</option><option value="Social">Social</option><option value="Email">Email</option><option value="Banking">Banking</option><option value="Gaming">Gaming</option><option value="Work">Work</option></select>
+      </div>
+    </div>
+    <div id="suit-pw-passphrase-settings" style="display:none;">
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:4px;">
+        <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Words <input type="number" id="suit-pw-wordcount" value="4" min="2" max="20" class="suit-input" style="width:50px;min-height:30px;font-size:13px;padding:4px;"></label>
+        <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Cnt <input type="number" id="suit-pw-ppcount" value="5" min="1" max="100" class="suit-input" style="width:50px;min-height:30px;font-size:13px;padding:4px;"></label>
+        <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Sep <input type="text" id="suit-pw-pp-sep" value="-" class="suit-input" style="width:35px;min-height:30px;font-size:13px;padding:4px;"></label>
+        <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-pw-pp-capitalize" checked> Cap</label>
+        <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-pw-pp-numbers"> +Num</label>
+        <select id="suit-pw-pp-category" class="suit-input" style="width:auto;min-height:30px;font-size:12px;padding:4px;"><option value="">Cat: None</option><option value="Social">Social</option><option value="Email">Email</option><option value="Banking">Banking</option><option value="Gaming">Gaming</option><option value="Work">Work</option></select>
+      </div>
+    </div>
+    <div class="suit-results">
+      <div class="suit-strength-row" style="margin:4px 0 6px;"><span class="suit-strength-lbl" id="suit-pw-strength-lbl" style="font-size:11px;min-width:100px;"></span><div class="suit-strength-track"><div class="suit-strength-fill" id="suit-pw-strength-fill"></div></div></div>
+      <div class="suit-listbox" id="suit-pw-listbox" style="min-height:80px;"></div>
+      <div class="suit-act-row" style="margin-top:6px;">
+        <button class="suit-btn-sm" data-suit-action="copy-all-passwords">📋 Copy All</button>
+        <button class="suit-btn-sm" data-suit-action="save-passwords">💾 Save</button>
+        <button class="suit-btn-ghost" data-suit-action="clear-passwords" style="margin-left:auto;">✕ Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="suit-panel panel" id="suit-panel-usernames">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+      <button class="suit-btn" data-suit-action="gen-usernames" style="margin-left:auto;min-height:34px;padding:6px 16px;font-size:13px;">🎲 Generate</button>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:4px;">
+      <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Cnt <input type="number" id="suit-un-count" value="5" min="1" max="200" class="suit-input" style="width:50px;min-height:30px;font-size:13px;padding:4px;"></label>
+      <select id="suit-un-pattern" class="suit-input" style="width:auto;min-height:30px;font-size:12px;padding:4px;">
+        <option value="adj_noun">Adjective+Noun</option><option value="adj_verb">Adjective+Verb</option><option value="noun_noun">Noun+Noun</option><option value="verb_noun">Verb+Noun</option><option value="adj_noun_verb">Adj+Noun+Verb</option><option value="random">Random</option>
+      </select>
+      <select id="suit-un-style" class="suit-input" style="width:auto;min-height:30px;font-size:12px;padding:4px;">
+        <option value="lower">lowercase</option><option value="camel">camelCase</option><option value="pascal">PascalCase</option><option value="snake">snake_case</option><option value="kebab">kebab-case</option>
+      </select>
+      <select id="suit-un-category" class="suit-input" style="width:auto;min-height:30px;font-size:12px;padding:4px;"><option value="">Cat: None</option><option value="Social">Social</option><option value="Email">Email</option><option value="Gaming">Gaming</option><option value="Work">Work</option></select>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:8px;">
+      <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-un-numbers" checked> +Numbers</label>
+      <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-un-norepeat"> NoRpt</label>
+      <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">#Digits <input type="number" id="suit-un-numdigits" value="2" min="1" max="6" class="suit-input" style="width:40px;min-height:30px;font-size:13px;padding:4px;"></label>
+      <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Pad <input type="number" id="suit-un-minlen" value="0" min="0" max="32" class="suit-input" style="width:40px;min-height:30px;font-size:13px;padding:4px;"></label>
+      <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Sep <input type="text" id="suit-un-separator" class="suit-input" style="width:30px;min-height:30px;font-size:13px;padding:4px;"></label>
+      <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Pre <input type="text" id="suit-un-prefix" class="suit-input" placeholder="pre" style="width:55px;min-height:30px;font-size:12px;padding:4px;"></label>
+      <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Suf <input type="text" id="suit-un-suffix" class="suit-input" placeholder="suf" style="width:55px;min-height:30px;font-size:12px;padding:4px;"></label>
+    </div>
+    <div class="suit-results">
+      <div class="suit-listbox" id="suit-un-listbox" style="min-height:80px;"></div>
+      <div class="suit-act-row" style="margin-top:6px;">
+        <button class="suit-btn-sm" data-suit-action="copy-all-usernames">📋 Copy All</button>
+        <button class="suit-btn-sm" data-suit-action="save-usernames">💾 Save</button>
+        <button class="suit-btn-ghost" data-suit-action="clear-usernames" style="margin-left:auto;">✕ Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="suit-panel panel" id="suit-panel-pins">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+      <button class="suit-btn" data-suit-action="gen-pins" style="margin-left:auto;min-height:34px;padding:6px 16px;font-size:13px;">🎲 Generate</button>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:4px;">
+      <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Len <input type="number" id="suit-pin-length" value="6" min="1" max="64" class="suit-input" style="width:50px;min-height:30px;font-size:13px;padding:4px;"></label>
+      <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Cnt <input type="number" id="suit-pin-count" value="5" min="1" max="100" class="suit-input" style="width:50px;min-height:30px;font-size:13px;padding:4px;"></label>
+      <select id="suit-pin-format" class="suit-input" style="width:auto;min-height:30px;font-size:12px;padding:4px;">
+        <option value="numeric">Numeric</option><option value="hex">Hex</option><option value="palindrome">Palindrome</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:8px;">
+      <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-pin-norepeat"> NoRpt</label>
+      <label class="suit-radio-item" style="min-height:0;gap:3px;font-size:12px;"><input type="checkbox" id="suit-pin-noseq"> NoSeq</label>
+      <select id="suit-pin-group" class="suit-input" style="width:auto;min-height:30px;font-size:12px;padding:4px;">
+        <option value="none">Group: Off</option><option value="2">XX XX</option><option value="3">XXX XXX</option><option value="4">XXXX XXXX</option>
+      </select>
+      <label style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:3px;">Sep <input type="text" id="suit-pin-grp-sep" value=" " class="suit-input" style="width:30px;min-height:30px;font-size:13px;padding:4px;"></label>
+    </div>
+    <div class="suit-results">
+      <div class="suit-listbox" id="suit-pin-listbox" style="min-height:80px;"></div>
+    </div>
+  </div>
+
+  <div class="suit-panel panel" id="suit-panel-email">
+    <div class="suit-provider-bar">
+      <span style="font-size:12px;color:var(--muted);font-family:'Inter', sans-serif">Provider:</span>
+      <button class="suit-prov-btn active" data-suit-action="select-provider" data-suit-provider="guerrilla">Guerrilla Mail</button>
+      <button class="suit-prov-btn" data-suit-action="select-provider" data-suit-provider="maildrop">Maildrop</button>
+      <button class="suit-prov-btn" data-suit-action="select-provider" data-suit-provider="tempmail">Temp-Mail</button>
+    </div>
+    <div class="suit-sub-tabbar">
+      <button class="suit-tab-btn active" id="suit-email-sub-single" data-suit-action="email-sub" data-suit-sub="single">📧 Single</button>
+      <button class="suit-tab-btn" id="suit-email-sub-bulk" data-suit-action="email-sub" data-suit-sub="bulk">📦 Bulk</button>
+    </div>
+    <div id="suit-email-single">
+      <div class="suit-section-lbl">EMAIL ADDRESS</div>
+      <div class="suit-email-addr-row">
+        <input type="text" id="suit-email-addr" class="suit-input" readonly placeholder="Tap New to generate...">
+        <button class="suit-btn-sm" data-suit-action="copy-email">Copy</button>
+        <button class="suit-btn-sm" data-suit-action="gen-email">New</button>
+      </div>
+      <div class="suit-status-bar" id="suit-email-status">Ready — tap New to generate an address</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;">
+        <span style="font-weight:700;font-size:15px;">Inbox</span>
+        <button class="suit-btn-sm" data-suit-action="refresh-inbox">↻ Refresh</button>
+      </div>
+      <div class="suit-inbox-wrap" style="margin-top:8px;">
+        <table class="suit-inbox-table"><thead><tr><th>FROM</th><th>SUBJECT</th><th>DATE</th></tr></thead><tbody id="suit-inbox-body"></tbody></table>
+      </div>
+      <div style="font-weight:700;font-size:15px;margin-top:12px;">Message</div>
+      <div class="suit-msg-body" id="suit-msg-body">Select a message to read it.</div>
+    </div>
+    <div id="suit-email-bulk" style="display:none;">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px;">
+        <span style="font-size:13px;color:var(--text);">Count:</span>
+        <input type="number" id="suit-bulk-count" value="5" min="1" max="50" class="suit-input" style="width:70px;">
+        <button class="suit-btn-sm" data-suit-action="gen-bulk">Generate</button>
+        <button class="suit-btn-sm" data-suit-action="copy-bulk">Copy All</button>
+        <button class="suit-btn-ghost" data-suit-action="clear-bulk">Clear</button>
+      </div>
+      <progress id="suit-bulk-progress" max="10" value="0"></progress>
+      <div class="suit-status-bar" id="suit-bulk-status">Ready to generate</div>
+      <div style="font-weight:700;margin-top:10px;margin-bottom:6px;">Addresses</div>
+      <div class="suit-listbox" id="suit-bulk-listbox" style="min-height:180px;"></div>
+    </div>
+  </div>
+
+  <div class="suit-panel panel" id="suit-panel-vault">
+    <div id="suit-vault-locked">
+      <div class="suit-vault-lock">
+        <div style="font-size:52px;color:var(--accent);text-shadow:0 0 24px var(--accent);">🔐</div>
+        <div style="font-size:22px;font-weight:700;">KeePass Vault</div>
+        <div style="color:var(--muted);font-size:13px;text-align:center;max-width:380px;line-height:1.5;">
+          AES-256 encrypted KeePass (.kdbx) vault. Your data never leaves your device.
+        </div>
+        <div class="suit-vault-file-bar">
+          <input type="password" id="suit-vault-pw-input" class="suit-input" placeholder="Master password" style="width:100%;">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;width:100%;">
+            <button class="suit-btn" data-suit-action="new-vault" style="flex:1;">✨ New Vault</button>
+            <label class="suit-btn" style="flex:1;text-align:center;cursor:pointer;">📂 Load .kdbx<input type="file" id="suit-vault-file-input" accept=".kdbx" style="display:none;"></label>
+          </div>
+          <div id="suit-vault-msg" style="font-size:11px;color:var(--muted);font-family:'Inter', sans-serif;text-align:center;"></div>
+        </div>
+      </div>
+    </div>
+    <div id="suit-vault-unlocked" style="display:none;">
+      <div class="suit-vault-toolbar">
+        <input type="text" id="suit-vault-search" class="suit-input" placeholder="Search entries...">
+        <button class="suit-btn-sm" data-suit-action="add-entry">+ Add Entry</button>
+        <button class="suit-btn-ghost" data-suit-action="save-vault">💾 Save .kdbx</button>
+        <button class="suit-btn-ghost" data-suit-action="export-vault">📤 Export JSON</button>
+        <button class="suit-btn-ghost" data-suit-action="lock-vault" style="margin-left:auto;">🔒 Lock</button>
+        <span id="suit-vault-stats" style="font-size:12px;color:var(--muted);font-family:'Inter', sans-serif;"></span>
+      </div>
+      <div style="background:rgba(255,180,84,.08);border:1px solid var(--suit-weak);padding:8px 12px;font-size:11px;color:var(--suit-weak);font-family:'Inter', sans-serif;">
+        ⚠️ Remember to tap "Save .kdbx" after making changes.
+      </div>
+      <div class="vault-main" style="display:flex;flex-direction:column;min-height:380px;">
+        <div class="suit-vault-sidebar" id="suit-vault-sidebar"></div>
+        <div style="flex:1;display:flex;flex-direction:column;">
+          <div class="suit-inbox-wrap" style="flex:1;max-height:none;border:none;border-bottom:1px solid var(--suit-border);">
+            <table class="suit-inbox-table" style="width:100%;"><thead><tr><th>TITLE</th><th>USERNAME</th><th>GROUP</th></tr></thead><tbody id="suit-vault-table-body"></tbody></table>
+          </div>
+        </div>
+        <div class="suit-vault-detail" id="suit-vault-detail">
+          <div style="color:var(--muted);font-size:12px;text-align:center;margin-top:40px;font-family:'Inter', sans-serif">Select an entry</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="suit-modal-overlay" id="suit-entry-modal">
+    <div class="suit-modal">
+      <h3 id="suit-modal-title">New Entry</h3>
+      <div class="suit-form-row"><label>Title *</label><input type="text" id="suit-ent-title" class="suit-input" placeholder="e.g. GitHub"></div>
+      <div class="suit-form-row">
+        <label>Username</label>
+        <div style="display:flex;gap:6px;"><input type="text" id="suit-ent-username" class="suit-input" placeholder="username" style="flex:1;"></div>
+      </div>
+      <div class="suit-form-row"><label>Password</label>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <input type="password" id="suit-ent-pw" class="suit-input" placeholder="••••••••" style="flex:1;min-width:100px;">
+          <button class="suit-btn-ghost" data-suit-action="toggle-ent-pw" style="min-height:44px;">👁</button>
+          <button class="suit-btn-ghost" data-suit-action="fill-gen-pw" style="min-height:44px;">Generate</button>
+        </div>
+      </div>
+      <div class="suit-form-row"><label>URL</label><input type="text" id="suit-ent-url" class="suit-input" placeholder="https://..."></div>
+      <div class="suit-form-row"><label>Group</label><input type="text" id="suit-ent-group" class="suit-input" placeholder="Root"></div>
+      <div class="suit-form-row"><label>Notes</label><textarea id="suit-ent-notes" class="suit-input" rows="3" style="min-height:80px;resize:vertical;" placeholder="Optional notes..."></textarea></div>
+      <div class="suit-modal-btns">
+        <button class="suit-btn-ghost" data-suit-action="close-modal">Cancel</button>
+        <button class="suit-btn" data-suit-action="save-entry">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="suit-toast"></div>
+</div>
+</section>
+</div><!-- /view-suit -->
+
+<div class="view" id="view-script-hub">
+  <div class="app-section" id="script-hub-wrap">
+    <section id="script-hub" class="script-page">
+  <div class="script-tabbar" role="tablist">
+    <button class="script-tab-btn active" data-script-subtab="script" role="tab" aria-selected="true">📜 Script</button>
+    <button class="script-tab-btn" data-script-subtab="features" role="tab" aria-selected="false">⭐ Features</button>
+    <button class="script-tab-btn" data-script-subtab="changelog" role="tab" aria-selected="false">📋 Changelog</button>
+  </div>
+  <div id="script-hub-content"></div>
+</section>
+  </div>
+</div>
+
+<div class="view" id="view-guides">
+<div class="app-section" id="guides-wrap">
+<section id="guides" class="helpful-page">
+  <div class="welcome-hero">
+    <div class="welcome-icon">✦</div>
+    <h2 class="welcome-title">Welcome to Sakura's Hub</h2>
+    <p class="welcome-sub">Scripts, tools, and resources — all in one place. Join our community!</p>
+  </div>
+
+  <h2>Helpful Stuff</h2>
+  <p class="helpful-sub">Tools, guides, and resources for a smoother and safer online experience.</p>
+
+  <div class="helpful-section-hdr">Resources &amp; Guides</div>
+  <div class="helpful-grid">
+    <div class="helpful-entry">
+      <div class="helpful-entry-head">
+        <div class="helpful-entry-icon">🛡️</div>
+        <div class="helpful-entry-meta">
+          <div class="helpful-entry-title">VPNs &amp; Proxies</div>
+        </div>
+      </div>
+      <div class="helpful-entry-body">Use Riseup VPN — no logs, free. Get it <a href="https://riseup.net/en/vpn" target="_blank" rel="noopener">here</a><br><br>Or use OpenVPN. Find free servers <a href="https://ipspeed.info/free-openvpn.php" target="_blank" rel="noopener">here</a>. Check if the servers are alive before using.<br><br>For proxies, configure them in your browser settings or use an app. Get free proxies <a href="https://ipspeed.info/free-proxy.php" target="_blank" rel="noopener">here</a></div>
+    </div>
+
+    <div class="helpful-entry">
+      <div class="helpful-entry-head">
+        <div class="helpful-entry-icon">⬇️</div>
+        <div class="helpful-entry-meta">
+          <div class="helpful-entry-title">Downloading</div>
+        </div>
+      </div>
+      <div class="helpful-entry-body">Download YouTube videos with <a href="https://github.com/yt-dlp/yt-dlp/releases/tag/2026.06.09" target="_blank" rel="noopener">yt-dlp</a><br><br>Download videos from streaming sites with this browser <a href="https://chromewebstore.google.com/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk" target="_blank" rel="noopener">extension</a><br><br>Download bulk files with <a href="https://jdownloader.org/download/index" target="_blank" rel="noopener">JDownloader</a>. It connects to servers so you can start downloads remotely.<br><br>Speed up bulk downloads with <a href="https://xtremedownloadmanager.com/#downloads" target="_blank" rel="noopener">XDM</a></div>
+    </div>
+
+    <div class="helpful-entry">
+      <div class="helpful-entry-head">
+        <div class="helpful-entry-icon">💻</div>
+        <div class="helpful-entry-meta">
+          <div class="helpful-entry-title">Windows 10 Activator</div>
+        </div>
+      </div>
+      <div class="helpful-entry-body">Windows 10 activator — <a href="https://files.catbox.moe/mue96d.zip" target="_blank" rel="noopener">download</a>. May not work for everything.</div>
+    </div>
+
+    <div class="helpful-entry">
+      <div class="helpful-entry-head">
+        <div class="helpful-entry-icon">📱</div>
+        <div class="helpful-entry-meta">
+          <div class="helpful-entry-title">Android APK Collection</div>
+        </div>
+      </div>
+      <div class="helpful-entry-body">Collection of APKs to watch anything for free.<br><br>Download all apps in one zip — <a href="https://files.catbox.moe/x7uwvn.zip" target="_blank" rel="noopener">download full pack</a><br><br>Extract the zip on your device and install the APKs you need. Works on Android phones and Android TV.</div>
+    </div>
+
+    <div class="helpful-entry">
+      <div class="helpful-entry-head">
+        <div class="helpful-entry-icon">📺</div>
+        <div class="helpful-entry-meta">
+          <div class="helpful-entry-title">Android TV Box Setup</div>
+        </div>
+      </div>
+      <div class="helpful-entry-body">Good cheap Android TV box — <a href="https://www.walmart.com/ip/onn-Google-TV-4K-Streaming-Box-New-2023-4K-UHD-Resolution/2835618394" target="_blank" rel="noopener">Onn Google TV 4K</a><br><br>To install APKs on it, get <a href="https://a.aliexpress.com/_mrf493v" target="_blank" rel="noopener">this OTG adapter</a>. Extract the apps from the APK pack and move them to a USB drive. Install a file explorer on the TV box if needed. You can also find APKs online and download them directly to the Android TV. Install a file manager from the app store to open them. You can also use ADB to install them directly.</div>
+    </div>
+
+    <div class="helpful-entry">
+      <div class="helpful-entry-head">
+        <div class="helpful-entry-icon">🔒</div>
+        <div class="helpful-entry-meta">
+          <div class="helpful-entry-title">Privacy, Ad Blockers &amp; Torrenting</div>
+        </div>
+      </div>
+      <div class="helpful-entry-body">Use an ad blocker. Get <a href="https://ublockorigin.com/" target="_blank" rel="noopener">uBlock Origin</a><br><br>Or use <a href="https://brave.com/" target="_blank" rel="noopener">Brave Browser</a> — built in ad blocker<br><br>Route your internet with <a href="https://www.torproject.org/download/" target="_blank" rel="noopener">Tor Browser</a><br><br>Paid VPN with no logs — <a href="https://mullvad.net/" target="_blank" rel="noopener">Mullvad</a>. Pay with crypto.<br><br>Download torrents with <a href="https://www.bittorrent.com/products/win/bittorrent-classic-compare/" target="_blank" rel="noopener">BitTorrent</a>. Use a VPN to hide your IP.<br><br>Seedbox for fast torrenting with lots of storage — <a href="https://seedit4.me/" target="_blank" rel="noopener">check it out</a></div>
+    </div>
+  </div>
+</section>
+</div>
+</div><!-- /view-guides -->
+<footer>🌸 Sakura's Hub · merged preview · layout from the redesign mockup · falling-blossom style from the overhaul · real directory data &middot; Suit &amp; Guides merged</footer>
+
+<div class="modal-overlay" id="modal">
+  <div class="dialog-box">
+    <h2>🔞 Adult content</h2>
+    <p>You must be 18 or older to view adult sections. Entering shows NSFW sites in the directory. Your browser history stays clean — this is only a page-load confirmation.</p>
+    <div class="dialog-actions">
+      <button class="btn-exit" id="modalExit" type="button">Exit</button>
+      <button class="btn-enter" id="modalEnter" type="button">I'm 18+, enter</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- real site constants ---------- */
+var LIST_KEY = 'sakura_list_data';
+var LIST_TTL_MS = 15 * 60 * 1000;
+var PRESETS_URL = 'https://raw.githubusercontent.com/Sakuras-Hub/Sakuras-Hub/refs/heads/main/need%20for%20the%20website%20to%20work/info.json';
+
+/* ---------- metadata (ported verbatim from index.html) ---------- */
+var COUNTRY_META = {
+  'RU': { label: 'Russia', flag: '🇷🇺' }, 'IN': { label: 'India', flag: '🇮🇳' },
+  'JP': { label: 'Japan', flag: '🇯🇵' }, 'PL': { label: 'Poland', flag: '🇵🇱' },
+  'GB': { label: 'United Kingdom', flag: '🇬🇧' }, 'ID': { label: 'Indonesia', flag: '🇮🇩' },
+  'FR': { label: 'France', flag: '🇫🇷' }, 'EG': { label: 'Egypt', flag: '🇪🇬' },
+  'DE': { label: 'Germany', flag: '🇩🇪' }, 'ES': { label: 'Spain', flag: '🇪🇸' },
+  'IT': { label: 'Italy', flag: '🇮🇹' }, 'KR': { label: 'South Korea', flag: '🇰🇷' },
+  'FI': { label: 'Finland', flag: '🇫🇮' }, 'BR': { label: 'Brazil', flag: '🇧🇷' },
+  'PT': { label: 'Portugal', flag: '🇵🇹' }
+};
+function getCountryMeta(cc){ return COUNTRY_META[cc] || { label: cc, flag: '🌍' }; }
+function siteCountryCodes(site){ return (site && Array.isArray(site.countries)) ? site.countries.filter(function(c){ return c && typeof c === 'string'; }) : []; }
+
+var CAT_META = {
+  'movies-tv': { label: 'Movies / TV', emoji: '🎬' }, 'anime': { label: 'Anime', emoji: '⛩️' },
+  'hentai': { label: 'Hentai', emoji: '🔞' }, 'manga': { label: 'Manga', emoji: '📖' },
+  'manhwa': { label: 'Manhwa', emoji: '🇰🇷' }, 'novel': { label: 'Novel', emoji: '📚' },
+  'drama': { label: 'Drama', emoji: '🎭' }, 'live-tv': { label: 'Live TV / Sports', emoji: '📡' },
+  'games': { label: 'Free Games', emoji: '🎮' }, 'apps': { label: 'Apps', emoji: '📱' },
+  'gacha': { label: 'Gacha', emoji: '🎰' }, 'download': { label: 'Download', emoji: '⬇️' },
+  'music': { label: 'Music', emoji: '🎵' }, 'amv': { label: 'AMV', emoji: '🎞️' },
+  'cosplay': { label: 'Cosplay', emoji: '🦸' }, 'schedule': { label: 'Schedule', emoji: '📅' },
+  'release-schedule': { label: 'Release Schedule', emoji: '📅' }, 'database': { label: 'Database', emoji: '🗃️' },
+  'tools': { label: 'Tools', emoji: '🛠️' }, 'quiz': { label: 'Quiz', emoji: '🧠' },
+  'trends': { label: 'Trends', emoji: '📈' }, 'guides': { label: 'Guides', emoji: '🗺️' },
+  'western': { label: 'Western', emoji: '🤠' }, 'imageboards': { label: 'Imageboards', emoji: '🖼️' },
+  'vtuber': { label: 'VTuber', emoji: '🟣' }, 'forums': { label: 'Forums', emoji: '💬' },
+  'xxx': { label: 'XXX', emoji: '🔞' }, 'sports': { label: 'Sports', emoji: '⚽' },
+  'news': { label: 'News', emoji: '📰' }, 'search': { label: 'Search Engines', emoji: '🔍' },
+  'software': { label: 'Software', emoji: '💻' }, 'other': { label: 'Other', emoji: '📁' },
+  'AI': { label: 'AI', emoji: '🤖' }, 'Adblocking / Privacy': { label: 'Adblocking / Privacy', emoji: '🔒' },
+  'Educational': { label: 'Educational', emoji: '🎓' }, 'Developer Tools': { label: 'Developer Tools', emoji: '🔧' },
+  'Design Resources': { label: 'Design Resources', emoji: '🎨' }, 'Video Editing': { label: 'Video Editing', emoji: '🎬' },
+  'Health & Fitness': { label: 'Health & Fitness', emoji: '💪' }, 'Food & Recipes': { label: 'Food & Recipes', emoji: '🍳' },
+  'Browser Extensions': { label: 'Browser Extensions', emoji: '🧩' }, 'Cloud Storage': { label: 'Cloud Storage', emoji: '☁️' },
+  'Torrenting': { label: 'Torrenting', emoji: '🌀' }, 'Media Centers': { label: 'Media Centers', emoji: '📺' },
+  'Internet Tools': { label: 'Internet Tools', emoji: '🌐' }, 'News': { label: 'News', emoji: '📰' },
+  'Travel Tools': { label: 'Travel Tools', emoji: '✈️' }, 'android': { label: 'Android', emoji: '📱' },
+  'ios': { label: 'iOS', emoji: '🍎' }, 'linux': { label: 'Linux', emoji: '🐧' },
+  'debrid': { label: 'Debrid Services', emoji: '⚡' }, 'usenet': { label: 'Usenet', emoji: '📰' },
+  'irc': { label: 'IRC', emoji: '💬' }, 'automation': { label: 'Automation', emoji: '🤖' },
+  'seedboxes': { label: 'Seedboxes', emoji: '🖥️' }, 'monitoring': { label: 'Monitoring', emoji: '📊' }
+};
+
+var SECTION_MAP = {
+  'Games': 'games', 'Apps': 'apps', 'Music': 'music', 'AMV': 'amv',
+  'Anime Streaming': 'anime', 'Anime Piracy': 'anime', 'Donghua Streaming': 'anime',
+  'Manga Reading': 'manga', 'Manga Piracy': 'manga',
+  'Manhwa Reading': 'manhwa', 'Novel Reading': 'novel',
+  'Hentai Streaming': 'hentai', 'Hentai Reading': 'hentai',
+  'Movies & TV Streaming': 'movies-tv', 'Asian Drama': 'drama',
+  'Live TV & Sports': 'live-tv',
+  'Pirated Games': 'games', 'PS4 Piracy': 'games', 'PS4 Homebrew': 'games',
+  'Gacha Games': 'gacha',
+  'Forums/Community': 'forums', 'Art/Imageboards': 'imageboards',
+  'Database/Tracker': 'database', 'Rank/Trends': 'trends',
+  'Wiki/Guides': 'guides', 'Western Streaming': 'western',
+  'Open Directories': 'download', 'Piracy Resources': 'tools',
+  'Download': 'download', 'Tools': 'tools',
+  'Cosplay': 'cosplay', 'VTuber': 'vtuber', 'Quiz': 'quiz',
+  'Schedule': 'release-schedule',
+  'Misc Tools': 'tools', 'Collections': 'other',
+  'All Purpose': 'other', 'Greatest Treasures': 'other',
+  'Mobile Apps': 'apps',
+  'AI': 'AI',
+  'Adblocking / Privacy': 'Adblocking / Privacy',
+  'Educational': 'Educational', 'Developer Tools': 'Developer Tools',
+  'Design Resources': 'Design Resources', 'Video Editing': 'Video Editing',
+  'Health & Fitness': 'Health & Fitness', 'Food & Recipes': 'Food & Recipes',
+  'Browser Extensions': 'Browser Extensions', 'Cloud Storage': 'Cloud Storage',
+  'Torrenting': 'Torrenting', 'Media Centers': 'Media Centers',
+  'Internet Tools': 'Internet Tools', 'News': 'News', 'Travel Tools': 'Travel Tools',
+  'Android': 'android', 'iOS': 'ios', 'Linux': 'linux',
+  'Debrid Services': 'debrid', 'Debrid / Leeches': 'debrid',
+  'Usenet': 'usenet', 'IRC': 'irc', 'IRC Tools': 'irc',
+  'Release Schedule': 'release-schedule', 'Trackers': 'tools',
+  'Automation': 'automation', 'Seedboxes': 'seedboxes', 'Monitoring': 'monitoring'
+};
+
+function getSectionMeta(section){
+  var key = SECTION_MAP[section];
+  if (!key) key = section.toLowerCase();
+  return CAT_META[key] || { label: section, emoji: autoEmoji(section) };
+}
+function autoEmoji(catId){
+  var id = (catId || '').toLowerCase();
+  if (id.indexOf('movie') !== -1 || id.indexOf('film') !== -1 || id.indexOf('tv') !== -1) return '🎬';
+  if (id.indexOf('anime') !== -1) return '⛩️';
+  if (id.indexOf('manga') !== -1) return '📖';
+  if (id.indexOf('manhwa') !== -1) return '🇰🇷';
+  if (id.indexOf('novel') !== -1) return '📚';
+  if (id.indexOf('drama') !== -1) return '🎭';
+  if (id.indexOf('live') !== -1 || id.indexOf('sport') !== -1) return '📡';
+  if (id.indexOf('game') !== -1) return '🎮';
+  if (id.indexOf('app') !== -1) return '📱';
+  if (id.indexOf('gacha') !== -1) return '🎰';
+  if (id.indexOf('download') !== -1) return '⬇️';
+  if (id.indexOf('music') !== -1) return '🎵';
+  if (id.indexOf('amv') !== -1) return '🎞️';
+  if (id.indexOf('cosplay') !== -1) return '🦸';
+  if (id.indexOf('schedule') !== -1) return '📅';
+  if (id.indexOf('database') !== -1 || id.indexOf('db') !== -1) return '🗃️';
+  if (id.indexOf('tool') !== -1) return '🛠️';
+  if (id.indexOf('quiz') !== -1) return '🧠';
+  if (id.indexOf('trend') !== -1) return '📈';
+  if (id.indexOf('guide') !== -1) return '🗺️';
+  if (id.indexOf('western') !== -1) return '🤠';
+  if (id.indexOf('image') !== -1 || id.indexOf('board') !== -1) return '🖼️';
+  if (id.indexOf('vtuber') !== -1 || id.indexOf('vtube') !== -1) return '🟣';
+  if (id.indexOf('forum') !== -1 || id.indexOf('community') !== -1) return '💬';
+  if (id.indexOf('hentai') !== -1 || id.indexOf('adult') !== -1) return '🔞';
+  if (id.indexOf('xxx') !== -1) return '🔞';
+  if (id.indexOf('news') !== -1) return '📰';
+  if (id.indexOf('search') !== -1) return '🔍';
+  if (id.indexOf('software') !== -1) return '💻';
+  return '🔗';
+}
+
+/* ---------- helpers (ported verbatim) ---------- */
+function esc(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function getHost(siteUrl){ try { return new URL(siteUrl).hostname; } catch(e) { return ''; } }
+function getFaviconUrl(siteUrl){
+  var host = getHost(siteUrl);
+  if (!host) return '';
+  return 'https://www.google.com/s2/favicons?domain=' + host + '&sz=64';
+}
+function getCatEmoji(site){
+  return (CAT_META[site.category] && CAT_META[site.category].emoji) || autoEmoji(site.category || site.section || '') || '🔗';
+}
+function faviconError(img){
+  if (!img.dataset.retried) {
+    img.dataset.retried = '1';
+    img.onerror = function(){
+      img.outerHTML = '<span class="preset-fallback-icon">' + (img.dataset.fallback || '🔗') + '</span>';
+    };
+    if (img.dataset.host) { img.src = 'https://icons.duckduckgo.com/ip3/' + img.dataset.host + '.ico'; return; }
+  }
+  img.outerHTML = '<span class="preset-fallback-icon">' + (img.dataset.fallback || '🔗') + '</span>';
+}
+function normalizeTags(tags){
+  if (Array.isArray(tags)) return tags;
+  if (typeof tags === 'string') return tags.split(',').map(function(t){ return t.trim(); }).filter(Boolean);
+  return [];
+}
+function isAvoidSite(site){
+  if (site.avoid) return true;
+  var avoidTags = ['scam','avoid','dangerous','unsafe','malware','virus','sketchy','shady','fake','fraud'];
+  var tags = normalizeTags(site.tags);
+  for (var i = 0; i < tags.length; i++) {
+    if (avoidTags.indexOf(tags[i].toLowerCase()) !== -1) return true;
+  }
+  return false;
+}
+function buildListCard(site){
+  var tags = normalizeTags(site.tags);
+  var siteAvoid = isAvoidSite(site);
+  var countryCodes = siteCountryCodes(site);
+  var h = '<a href="' + esc(site.url) + '" target="_blank" rel="noopener noreferrer" class="preset-card' + (siteAvoid ? ' preset-avoid' : '') + '" data-name="' + esc((site.name + ' ' + tags.join(' ')).toLowerCase()) + '"';
+  if (site.nsfw) h += ' data-nsfw="true"';
+  if (siteAvoid) h += ' data-avoid="true"';
+  if (countryCodes.length) h += ' data-country="' + esc(countryCodes.join(',')) + '"';
+  h += '>';
+  h += '<span class="preset-dot"></span>';
+  h += '<img class="preset-favicon" src="' + getFaviconUrl(site.url) + '" alt="' + esc(site.name) + '" loading="lazy" data-host="' + getHost(site.url) + '" data-fallback="' + getCatEmoji(site) + '" onerror="faviconError(this)">';
+  h += '<div class="preset-body">';
+  h += '<div class="preset-top"><span class="preset-name">' + (site.emoji ? site.emoji + ' ' : '') + esc(site.name) + '</span><span class="preset-rank">#' + site.rank + '</span></div>';
+  h += '<div class="preset-meta">';
+  if (siteAvoid) { var reason = site.avoid_reason || 'Known unsafe site - avoid'; h += '<span class="preset-avoid-badge">🚫 ' + esc(reason) + '</span>'; }
+  if (site.nsfw) h += '<span class="preset-nsfw">🔞 NSFW</span>';
+  if (site.pricing && site.pricing !== 'free*' && site.pricing !== 'free') h += '<span class="preset-pricing">' + esc(site.pricing) + '</span>';
+  if (site.section) { var secMeta = getSectionMeta(site.section); h += '<span class="preset-section-tag">' + secMeta.emoji + ' ' + esc(secMeta.label) + '</span>'; }
+  if (countryCodes.length) {
+    countryCodes.forEach(function(cc){ var cm = getCountryMeta(cc); h += '<span class="preset-country">' + cm.flag + ' ' + esc(cm.label) + '</span>'; });
+  }
+  h += '</div>';
+  h += '<div class="preset-tags">';
+  var maxTags = 4;
+  tags.slice(0, maxTags).forEach(function(t){ h += '<span class="preset-tag">' + esc(t) + '</span>'; });
+  if (tags.length > maxTags) h += '<span class="preset-tag preset-tag-more">+' + (tags.length - maxTags) + '</span>';
+  h += '</div></div>';
+  h += '<span class="preset-arrow">→</span>';
+  h += '</a>';
+  return h;
+}
+
+/* ---------- grouping (SECTION_NORMALIZE + TAG_ROUTES, verbatim) ---------- */
+var SECTION_NORMALIZE = {
+  'Pirated Games': 'Games', 'PS4 Piracy': 'Games', 'PS4 Homebrew': 'Games',
+  'Greatest Treasures': 'Misc Tools', 'Mobile Apps': 'Apps', 'AMV': 'Misc Tools'
+};
+var TAG_ROUTES = [
+  { tags: ['AI','Artificial Intelligence'], section: 'AI' },
+  { tags: ['Adblocking','Privacy','VPN'], section: 'Adblocking / Privacy' },
+  { tags: ['Developer','Dev'], section: 'Developer Tools' },
+  { tags: ['Science','Research','Courses','Learning','Education'], section: 'Educational' },
+  { tags: ['Fonts','Typography','Design','Photography','Photo','Editing'], section: 'Design Resources' },
+  { tags: ['Video Editing'], section: 'Video Editing' },
+  { tags: ['Health','Fitness'], section: 'Health & Fitness' },
+  { tags: ['Food','Recipes'], section: 'Food & Recipes' },
+  { tags: ['Extension','Browser'], section: 'Browser Extensions' },
+  { tags: ['Cloud','Storage'], section: 'Cloud Storage' },
+  { tags: ['Torrent'], section: 'Torrenting' },
+  { tags: ['Plex','Kodi','Stremio','Jellyfin'], section: 'Media Centers' },
+  { tags: ['Internet'], section: 'Internet Tools' },
+  { tags: ['News','RSS'], section: 'News' },
+  { tags: ['Travel','Booking'], section: 'Travel Tools' },
+  { tags: ['Reddit'], section: 'Internet Tools' }
+];
+function routeByTags(site){
+  var tagList = [];
+  if (Array.isArray(site.tags)) tagList = site.tags;
+  else if (typeof site.tags === 'string' && site.tags) tagList = site.tags.split(',').map(function(t){ return t.trim(); });
+  for (var ti = 0; ti < tagList.length; ti++) {
+    var t = tagList[ti];
+    for (var ri = 0; ri < TAG_ROUTES.length; ri++) {
+      if (TAG_ROUTES[ri].tags.indexOf(t) !== -1) return TAG_ROUTES[ri].section;
+    }
+  }
+  return null;
+}
+
+/* ---------- app state ---------- */
+var sites = null;      // raw list from info.json
+var groups = {};       // section -> array of sites
+var sectionOrder = []; // section names, CAT_META order first, rest alpha
+var nsfwSections = {}; // section -> true if all sites nsfw
+var labelGroups = [];  // merged display labels: [{label, firstKey, sections:[], nsfwOnly, total}]
+var activeTab = '__all__';
+var unlocked = false;
+var query = '';
+var countryFilter = 'all';   // 'all' | '__global__' | country code
+var showAvoid = false;
+var showNSFW = false;
+
+/* ---------- el refs ---------- */
+var el = {
+  catDd: document.getElementById('navCatDd'),
+  catTrigger: document.getElementById('catTrigger'),
+  catMenu: document.getElementById('catMenu'),
+  grid: document.getElementById('grid'),
+  stats: document.getElementById('stats'),
+  stSites: document.getElementById('stSites'),
+  stCats: document.getElementById('stCats'),
+  search: document.getElementById('searchInput'),
+  adultBtn: document.getElementById('adultBtn'),
+  modal: document.getElementById('modal'),
+  modalEnter: document.getElementById('modalEnter'),
+  modalExit: document.getElementById('modalExit'),
+  toast: document.getElementById('toast'),
+  countryDd: document.getElementById('flCountry'),
+  countryTrigger: document.getElementById('countryTrigger'),
+  countryMenu: document.getElementById('countryMenu'),
+  avoidToggle: document.getElementById('avoidToggle'),
+  nsfwToggle: document.getElementById('nsfwToggle')
+};
+
+function toast(msg){
+  el.toast.textContent = msg;
+  el.toast.classList.add('show');
+  setTimeout(function(){ el.toast.classList.remove('show'); }, 2600);
+}
+
+/* ---------- load ---------- */
+function loadFromStorage(){
+  try {
+    var l = localStorage.getItem(LIST_KEY);
+    var ver = localStorage.getItem(LIST_KEY + '_ver');
+    var ts = parseInt(localStorage.getItem(LIST_KEY + '_ts'), 10) || 0;
+    if (l && ver === '4' && Date.now() - ts < LIST_TTL_MS) return JSON.parse(l);
+  } catch(e) {}
+  return null;
+}
+function saveToStorage(list){
+  try {
+    localStorage.setItem(LIST_KEY, JSON.stringify(list));
+    localStorage.setItem(LIST_KEY + '_ver', '4');
+    localStorage.setItem(LIST_KEY + '_ts', String(Date.now()));
+  } catch(e) { console.warn('localStorage full, skipping cache', e); }
+}
+function loadData(){
+  var cached = loadFromStorage();
+  if (cached && cached.length) { build(cached); return; }
+  el.grid.innerHTML = '<div class="loading">🌸 Loading directory…</div>';
+  fetch(PRESETS_URL + '?_=' + Date.now())
+    .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function(list){
+      if (!Array.isArray(list) || !list.length) throw new Error('Empty list');
+      saveToStorage(list);
+      build(list);
+      toast('Loaded ' + list.length + ' sites');
+    })
+    .catch(function(err){
+      el.grid.innerHTML = '<div class="empty"><h3>⚠️ Could not load the directory</h3><p style="margin-top:8px">' + esc(err.message || String(err)) + '</p><p style="margin-top:6px;font-size:.75rem">Open this file with internet access, or reload to retry.</p></div>';
+    });
+}
+
+/* ---------- grouping + render ---------- */
+function build(list){
+  sites = list;
+  groups = {};
+  nsfwSections = {};
+
+  list.forEach(function(s){
+    if (!s || !s.url) return;
+    var u = String(s.url).toLowerCase();
+    if (u.indexOf('reddit.com') !== -1) return;   // same filter as the real site
+
+    var norm = SECTION_NORMALIZE[s.section] || s.section;
+    var site = {
+      url: s.url, name: s.name || 'Untitled', section: norm,
+      nsfw: !!s.nsfw, tags: normalizeTags(s.tags),
+      avoid: !!s.avoid, avoid_reason: s.avoid_reason || '',
+      rank: s.rank || 0, emoji: s.emoji || '', pricing: s.pricing || '',
+      countries: siteCountryCodes(s)
+    };
+    if (norm === 'Misc Tools') {
+      var routed = routeByTags(site);
+      if (routed) site.section = routed;
+    }
+    if (!groups[site.section]) groups[site.section] = [];
+    groups[site.section].push(site);
+  });
+
+  // section order: CAT_META key order via SECTION_MAP, unknown sections alpha last
+  var catOrder = Object.keys(CAT_META);
+  var named = [], unknown = [];
+  Object.keys(groups).forEach(function(sec){
+    var key = SECTION_MAP[sec] || sec;
+    var idx = catOrder.indexOf(key);
+    if (idx === -1) unknown.push(sec); else named.push({ sec: sec, idx: idx });
+  });
+  named.sort(function(a,b){ return a.idx - b.idx; });
+  unknown.sort();
+  sectionOrder = named.map(function(n){ return n.sec; }).concat(unknown);
+
+  // nsfw-only sections
+  sectionOrder.forEach(function(sec){
+    var arr = groups[sec];
+    var nsfwCount = 0;
+    arr.forEach(function(s){ if (s.nsfw) nsfwCount++; });
+    if (nsfwCount === arr.length && arr.length > 0) nsfwSections[sec] = true;
+  });
+
+  // merge display labels (Anime Streaming + Donghua Streaming -> '⛩️ Anime', Hentai Reading + Hentai Streaming -> '🔞 Hentai')
+  labelGroups = [];
+  var seen = {};
+  sectionOrder.forEach(function(sec){
+    var meta = getSectionMeta(sec);
+    var label = meta.emoji + ' ' + meta.label;
+    var lg = seen[label];
+    if (!lg) {
+      lg = { label: label, firstKey: sec, sections: [], nsfwOnly: true, total: 0 };
+      seen[label] = lg;
+      labelGroups.push(lg);
+    }
+    lg.sections.push(sec);
+    lg.total += groups[sec].length;
+    lg.nsfwOnly = lg.nsfwOnly && !!nsfwSections[sec];
+  });
+
+  el.stSites.textContent = sites.length.toLocaleString();
+  el.stCats.textContent = labelGroups.length;
+
+  buildCountryMenu();
+  renderTabs();
+  renderGrid();
+}
+
+/* ---------- country dropdown ---------- */
+function countryCodesInData(){
+  var seen = {};
+  sites.forEach(function(s){
+    siteCountryCodes(s).forEach(function(cc){ seen[cc] = true; });
+  });
+  var codes = Object.keys(seen);
+  codes.sort(function(a,b){
+    var la = getCountryMeta(a).label, lb = getCountryMeta(b).label;
+    return la < lb ? -1 : la > lb ? 1 : 0;
+  });
+  return codes;
+}
+
+function buildCountryMenu(){
+  if (!el.countryMenu) return;
+  var h = '<div class="fl-dd-item' + (countryFilter === 'all' ? ' selected' : '') + '" data-value="all">🌍 All Countries</div>';
+  h += '<div class="fl-dd-item' + (countryFilter === '__global__' ? ' selected' : '') + '" data-value="__global__">🌐 Global</div>';
+  countryCodesInData().forEach(function(cc){
+    var cm = getCountryMeta(cc);
+    h += '<div class="fl-dd-item' + (countryFilter === cc ? ' selected' : '') + '" data-value="' + cc + '">' + cm.flag + ' ' + cm.label + '</div>';
+  });
+  el.countryMenu.innerHTML = h;
+}
+
+function initCountryDropdown(){
+  var dd = el.countryDd, trigger = el.countryTrigger, menu = el.countryMenu;
+  if (!dd || !trigger || !menu) return;
+  trigger.addEventListener('click', function(e){
+    e.stopPropagation();
+    dd.classList.toggle('open');
+  });
+  menu.addEventListener('click', function(e){
+    var item = e.target.closest('.fl-dd-item');
+    if (!item) return;
+    countryFilter = item.dataset.value;
+    menu.querySelectorAll('.fl-dd-item').forEach(function(el){ el.classList.toggle('selected', el === item); });
+    trigger.textContent = item.textContent;
+    dd.classList.remove('open');
+    applySearch();
+  });
+  document.addEventListener('click', function(e){
+    if (!dd.contains(e.target)) dd.classList.remove('open');
+  });
+}
+
+function findLabelGroup(label){
+  for (var i = 0; i < labelGroups.length; i++) if (labelGroups[i].label === label) return labelGroups[i];
+  return null;
+}
+
+function renderTabs(){
+  if (!el.catMenu) return;
+  var html = '';
+  var total = 0;
+  labelGroups.forEach(function(lg){ total += lg.total; });
+  html += '<div class="fl-dd-item' + (activeTab === '__all__' ? ' selected' : '') + '" data-tab="__all__">🌐 All <span class="cnt">' + total.toLocaleString() + '</span></div>';
+  labelGroups.forEach(function(lg){
+    if (lg.nsfwOnly && !unlocked) return;  // hidden behind the 🔞 gate
+    var extra = activeTab === lg.label ? ' selected' : '';
+    if (lg.nsfwOnly) extra += ' nsfw-tab';
+    html += '<div class="fl-dd-item' + extra + '" data-tab="' + esc(lg.label) + '">' + lg.label + ' <span class="cnt">' + lg.total.toLocaleString() + '</span></div>';
+  });
+  el.catMenu.innerHTML = html;
+  var lbl = findLabelGroup(activeTab);
+  el.catTrigger.textContent = activeTab === '__all__' || !lbl ? '🗂️ All Categories' : '🗂️ ' + lbl.label;
+}
+
+function initCategoryDropdown(){
+  var dd = el.catDd, trigger = el.catTrigger, menu = el.catMenu;
+  if (!dd || !trigger || !menu) return;
+  trigger.addEventListener('click', function(e){
+    e.stopPropagation();
+    dd.classList.toggle('open');
+  });
+  menu.addEventListener('click', function(e){
+    var item = e.target.closest('.fl-dd-item');
+    if (!item) return;
+    activeTab = item.dataset.tab;
+    renderTabs();
+    renderGrid();
+    dd.classList.remove('open');
+  });
+  document.addEventListener('click', function(e){
+    if (!dd.contains(e.target)) dd.classList.remove('open');
+  });
+}
+
+function initViewTabs(){
+  var ids = ['directory', 'suit', 'script-hub', 'guides'];
+  function show(v){
+    ids.forEach(function(id){
+      var vEl = document.getElementById('view-' + id);
+      if (vEl) vEl.classList.toggle('show', id === v);
+    });
+    document.querySelectorAll('.nav-links a[data-view]').forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('data-view') === v);
+    });
+    window.scrollTo(0, 0);
+  }
+  document.querySelectorAll('[data-view]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      show(a.getAttribute('data-view'));
+    });
+  });
+}
+
+function renderGrid(){
+  var q = query.toLowerCase().trim();
+  var html = '';
+  var filtersActive = q || countryFilter !== 'all' || showAvoid || showNSFW;
+
+  var siteMatches = function(s){
+    if (s.nsfw && !unlocked) return false;
+    if (showNSFW && !s.nsfw) return false;
+    if (showAvoid && !s.avoid) return false;
+    if (countryFilter === '__global__') {
+      if (siteCountryCodes(s).length) return false;
+    } else if (countryFilter !== 'all') {
+      if (siteCountryCodes(s).indexOf(countryFilter) === -1) return false;
+    }
+    if (q && (s.name + ' ' + normalizeTags(s.tags).join(' ')).toLowerCase().indexOf(q) === -1) return false;
+    return true;
+  };
+
+  var renderSites = function(lg){
+    var cards = [];
+    lg.sections.forEach(function(sec){
+      groups[sec].forEach(function(s){
+        if (!siteMatches(s)) return;
+        cards.push(buildListCard(s));
+      });
+    });
+    return cards;
+  };
+
+  var renderHead = function(lg, count){
+    return '<div class="section-head"><h2>' + lg.label + '</h2><span class="count"><b>' + count.toLocaleString() + '</b> ' + (count === 1 ? 'site' : 'sites') + '</span></div>';
+  };
+
+  if (activeTab === '__all__') {
+    labelGroups.forEach(function(lg){
+      if (lg.nsfwOnly && !unlocked) return;
+      var cards = renderSites(lg);
+      if (!cards.length && filtersActive) return; // hide empty sections while filtering
+      html += renderHead(lg, cards.length);
+      html += '<div class="grid">' + cards.join('') + '</div>';
+    });
+  } else {
+    var lg = findLabelGroup(activeTab);
+    if (!lg) { el.grid.innerHTML = '<div class="empty">Nothing here yet.</div>'; return; }
+    var cards = renderSites(lg);
+    html += renderHead(lg, cards.length);
+    html += '<div class="grid">' + cards.join('') + '</div>';
+  }
+
+  if (!html) html = '<div class="empty">Nothing matches your filters.</div>';
+  el.grid.innerHTML = html;
+}
+
+function applySearch(){
+  query = el.search.value;
+  renderGrid();
+}
+
+/* ---------- 18+ gate ---------- */
+function openModal(){ el.modal.classList.add('show'); }
+function closeModal(){ el.modal.classList.remove('show'); }
+function unlockAdults(){
+  unlocked = true;
+  el.adultBtn.classList.add('unlocked');
+  el.adultBtn.textContent = '🔞 18+ ✓';
+  closeModal();
+  renderTabs();
+  renderGrid();
+  toast('Adult sections unlocked');
+}
+
+/* ---------- falling blossoms (ported physics; no #spot color box) ---------- */
+(function blossoms(){
+  var layerDefs = [
+    { sizeMin: 8, sizeMax: 12, speedMin: 0.8, speedMax: 1.4, swayMin: 5, swayMax: 10, opMin: 0.08, opMax: 0.15, blur: 'blur(0.6px)' },
+    { sizeMin: 13, sizeMax: 18, speedMin: 1.3, speedMax: 2.2, swayMin: 9, swayMax: 16, opMin: 0.16, opMax: 0.28, blur: '' },
+    { sizeMin: 19, sizeMax: 24, speedMin: 1.8, speedMax: 3.0, swayMin: 14, swayMax: 22, opMin: 0.25, opMax: 0.40, blur: '' }
+  ];
+  var totalCount = 10 + Math.floor(Math.random() * 11);
+  var particles = [];
+  for (var i = 0; i < totalCount; i++) {
+    var layer = layerDefs[i % 3];
+    var particleEl = document.createElement('div');
+    particleEl.className = 'bg-particle';
+    var size = layer.sizeMin + Math.random() * (layer.sizeMax - layer.sizeMin);
+    particleEl.style.fontSize = size + 'px';
+    particleEl.textContent = '🌸';
+    if (layer.blur) particleEl.style.filter = layer.blur;
+    var lx = Math.random() * 100;
+    var ly = Math.random() * 110 - 10;
+    particleEl.style.left = lx + '%';
+    particleEl.style.top = ly + '%';
+    particleEl.style.opacity = layer.opMin + Math.random() * (layer.opMax - layer.opMin);
+    var fallSpeed = layer.speedMin + Math.random() * (layer.speedMax - layer.speedMin);
+    var swayAmp = layer.swayMin + Math.random() * (layer.swayMax - layer.swayMin);
+    var swayFreq = 0.08 + Math.random() * 0.3;
+    var turbFreq = 0.03 + Math.random() * 0.07;
+    var windDrift = (Math.random() - 0.5) * 0.3;
+    var rotSpeed = (Math.random() - 0.5) * 3;
+    var phase = Math.random() * Math.PI * 2;
+    var altPhase = Math.random() * Math.PI * 2;
+    document.body.appendChild(particleEl);
+    particles.push({ el: particleEl, lx: lx, ly: ly, fallSpeed: fallSpeed, swayAmp: swayAmp, swayFreq: swayFreq, turbFreq: turbFreq, windDrift: windDrift, rotSpeed: rotSpeed, phase: phase, altPhase: altPhase, start: Date.now(), vx: 0, vy: 0 });
+  }
+
+  var mouseX = -9999, mouseY = -9999, prevMouseX = -9999, prevMouseY = -9999;
+  var globalWindX = 0, globalWindY = 0, windTargetX = 0, windTargetY = 0;
+  var nextWindChange = Date.now() + 2000 + Math.random() * 4000;
+
+  document.addEventListener('mousemove', function(e){
+    prevMouseX = mouseX; prevMouseY = mouseY;
+    mouseX = e.clientX; mouseY = e.clientY;
+  });
+  document.addEventListener('touchmove', function(e){
+    prevMouseX = mouseX; prevMouseY = mouseY;
+    mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY;
+  });
+
+  function tick(){
+    var now = Date.now();
+    var vh = window.innerHeight;
+    var mVX = mouseX - prevMouseX, mVY = mouseY - prevMouseY;
+
+    if (now > nextWindChange) {
+      windTargetX = (Math.random() - 0.5) * 0.5;
+      windTargetY = (Math.random() - 0.5) * 0.15;
+      nextWindChange = now + 3000 + Math.random() * 5000;
+    }
+    globalWindX += (windTargetX - globalWindX) * 0.01;
+    globalWindY += (windTargetY - globalWindY) * 0.01;
+
+    particles.forEach(function(p){
+      var t = (now - p.start) / 1000;
+      var gust = 1 + 0.25 * Math.sin(t * 0.12 + p.phase);
+      var fallY = t * p.fallSpeed * gust;
+      var swayX = Math.sin(t * p.swayFreq * Math.PI * 2 + p.phase) * p.swayAmp + Math.sin(t * p.turbFreq * Math.PI * 2 + p.altPhase) * p.swayAmp * 0.5;
+      var driftX = t * p.windDrift;
+      var rot = t * p.rotSpeed * 25;
+      var pPosX = p.lx / 100 * window.innerWidth + swayX + driftX + p.vx;
+      var pPosY = (p.ly + fallY) / 100 * vh + p.vy;
+      var dx = pPosX - mouseX, dy = pPosY - mouseY;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      var brushRadius = 140;
+      if (dist < brushRadius && dist > 0) {
+        var strength = (brushRadius - dist) / brushRadius;
+        var speed = Math.sqrt(mVX * mVX + mVY * mVY);
+        var wind = Math.min(speed * 0.12, 3) * strength;
+        var norm = Math.abs(mVX) + Math.abs(mVY) + 1;
+        p.vx += (mVX / norm) * wind;
+        p.vy += (mVY / norm) * wind;
+        p.vx += (Math.random() - 0.5) * 0.2 * strength;
+        p.vy += (Math.random() - 0.5) * 0.2 * strength;
+      }
+      p.vx += globalWindX * 0.15;
+      p.vy += globalWindY * 0.15;
+      p.vx *= 0.96;
+      p.vy *= 0.96;
+      var currentY = p.ly + fallY;
+      if (currentY > 105) {
+        p.start = now; p.ly = -5 - Math.random() * 15; p.lx = Math.random() * 100;
+        p.el.style.left = p.lx + '%'; p.vx = 0; p.vy = 0; p.windDrift = (Math.random() - 0.5) * 0.2; return;
+      }
+      p.el.style.top = currentY + '%';
+      p.el.style.transform = 'translate(' + (swayX + driftX + p.vx) + 'px, ' + p.vy + 'px) rotate(' + rot + 'deg)';
+    });
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ---------- wiring ---------- */
+el.adultBtn.addEventListener('click', function(){ unlocked ? null : openModal(); });
+el.modalEnter.addEventListener('click', unlockAdults);
+el.modalExit.addEventListener('click', closeModal);
+el.modal.addEventListener('click', function(e){ if (e.target === el.modal) closeModal(); });
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape' && el.modal.classList.contains('show')) closeModal();
+  if (e.key === 'Enter' && el.modal.classList.contains('show')) unlockAdults();
+});
+var debounce = null;
+el.search.addEventListener('input', function(){
+  clearTimeout(debounce);
+  debounce = setTimeout(applySearch, 120);
+});
+
+/* ---------- filter bar wiring ---------- */
+if (el.avoidToggle) {
+  el.avoidToggle.addEventListener('click', function(){
+    showAvoid = !showAvoid;
+    el.avoidToggle.classList.toggle('active', showAvoid);
+    el.avoidToggle.textContent = showAvoid ? '🚫 Avoid ✓' : '🚫 Avoid';
+    applySearch();
+  });
+}
+if (el.nsfwToggle) {
+  el.nsfwToggle.addEventListener('click', function(){
+    if (!unlocked) { toast('Unlock 18+ first'); return; }
+    showNSFW = !showNSFW;
+    el.nsfwToggle.classList.toggle('active', showNSFW);
+    el.nsfwToggle.textContent = showNSFW ? '🔞 NSFW ✓' : '🔞 NSFW';
+    applySearch();
+  });
+}
+initCountryDropdown();
+initCategoryDropdown();
+initViewTabs();
+
+loadData();
+})();
+
+(function(){
+  'use strict';
+
+  /* ── constants (ported verbatim from ROOT) ── */
+  var suit_UPPER   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var suit_LOWER   = 'abcdefghijklmnopqrstuvwxyz';
+  var suit_DIGITS  = '0123456789';
+  var suit_SYMBOLS = '!@#$%^&*()-_=+[]{}|;:,.<>?';
+  var suit_AMBIG   = new Set([...'0O1lI']);
+
+  var suit_ADJ = ['swift','silent','cosmic','blazing','frozen','golden','shadow','electric','ancient','neon','crystal','savage','mystic','steel','crimson','velvet','hollow','lunar','solar','stormy','rusty','glowing','dark','bright','wild','calm','brave','sneaky','lucky','iron','jade','obsidian','phantom','turbo','ultra','mega','hyper','cyber','quantum','astral','void','primal','echo','frost','ember','thorn','drift'];
+  var suit_NOUN = ['falcon','panda','vortex','phantom','cipher','nova','titan','ranger','wolf','gecko','comet','raven','sprite','kraken','goblin','hydra','mango','pixel','ninja','dragon','otter','badger','cactus','quasar','nebula','bandit','monk','hawk','lynx','cobra','jaguar','mongoose','pegasus','sphinx','minotaur','phoenix','viper','shark','tiger','beast','blade','storm','forge','core','fuse','node','edge'];
+  var suit_VERB = ['runs','leaps','codes','hacks','drifts','surfs','lurks','roams','spins','flies','hunts','glides','blinks','zaps','strikes','dashes','vaults','snipes','blasts','warps','builds','crafts','draws','writes','reads','moves','flows','syncs','links','clicks'];
+
+  /* ── state ── */
+  var suitPasswords = [];
+  var suitUsernames = [];
+  var suitEmailProviders = [
+    { id: 'guerrilla', name: 'Guerrilla Mail', api: 'guerrilla' },
+    { id: 'maildrop', name: 'Maildrop', api: 'maildrop' },
+    { id: 'tempmail', name: 'Temp-Mail', api: 'tempmail' }
+  ];
+  var suitActiveEmailProvider = 'guerrilla';
+  var suitEmailAddr = '';
+  var suitEmailInbox = [];
+  var suitEmailBulk = [];
+  var suitKdbxDb = null;
+  var suitKdbxFile = null;
+  var suitKdbxFileName = 'vault.kdbx';
+  var suitVaultEntries = [];
+  var suitVaultFilter = '';
+  var suitSelectedEntry = null;
+  var SuitditingEntry = null;
+  var suitKdbxPromise = null;
+
+  /* ── guarded DOM helpers ── */
+  function suitEl(id) { return document.getElementById(id); }
+  function suitVal(id, fb) { var el = suitEl(id); return el ? el.value : fb; }
+  function suitChecked(id) { var el = suitEl(id); return el ? el.checked : false; }
+
+  /* ── clipboard with textarea fallback + toast ── */
+  function suitCopyText(text, label) {
+    if(!text) { suitToast('Nothing to copy.', 'var(--suit-weak)'); return; }
+    if(navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() { suitToast(label || 'Copied!'); }).catch(function() { suitCopyFallback(text, label); });
+    } else {
+      suitCopyFallback(text, label);
+    }
+  }
+  function suitCopyFallback(text, label) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); suitToast(label || 'Copied!'); }
+    catch(err) { suitToast('Copy failed.', 'var(--danger)'); }
+    document.body.removeChild(ta);
+  }
+
+  /* ── toast ── */
+  function suitToast(msg, color) {
+    var t = suitEl('suit-toast');
+    if(!t) return;
+    t.textContent = msg;
+    t.style.background = color || 'var(--ok)';
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function() { t.classList.remove('show'); }, 2600);
+  }
+
+  /* ── confirm: use the host page's dialog when present, else native confirm ── */
+  function suitConfirm(msg, onYes) {
+    if(typeof window.showConfirm === 'function') { window.showConfirm(msg, onYes); return; }
+    if(window.confirm(msg)) { if(onYes) onYes(); }
+  }
+
+  function suitEsc(s) {
+    if(!s) return '';
+    var d = document.createElement('div');
+    d.textContent = String(s);
+    return d.innerHTML;
+  }
+
+  /* ── crypto helpers ── */
+  function suitCryptoRandom(max) {
+    var arr = new Uint32Array(1);
+    crypto.getRandomValues(arr);
+    return arr[0] % max;
+  }
+  function suitRand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  /* ── password generation ── */
+  function suitBuildCharset(u, l, d, s, avoidAmbig, exclude) {
+    var pool = '';
+    if(u) pool += suit_UPPER;
+    if(l) pool += suit_LOWER;
+    if(d) pool += suit_DIGITS;
+    if(s) pool += suit_SYMBOLS;
+    if(!pool) throw new Error('At least one character type must be enabled.');
+    if(avoidAmbig) pool = [...pool].filter(function(c) { return !suit_AMBIG.has(c); }).join('');
+    if(exclude) { var excl = new Set([...exclude]); pool = [...pool].filter(function(c) { return !excl.has(c); }).join(''); }
+    pool = [...new Set([...pool])].join('');
+    if(!pool) throw new Error('No characters left after exclusions.');
+    return pool;
+  }
+
+  function suitGenPassword(length, u, l, d, s, avoidAmbig, noRepeat, exclude, startLetter, minDigits, minSymbols) {
+    var pool = suitBuildCharset(u, l, d, s, avoidAmbig, exclude);
+    if(noRepeat && length > pool.length) throw new Error('Cannot make ' + length + '-char no-repeat password with only ' + pool.length + ' unique chars.');
+    if(minDigits > 0 && d) {
+      var availD = [...suit_DIGITS].filter(function(c) { return pool.indexOf(c) !== -1; });
+      if(availD.length < minDigits) throw new Error('Not enough digit characters available for minimum digits setting.');
+    }
+    if(minSymbols > 0 && s) {
+      var availS = [...suit_SYMBOLS].filter(function(c) { return pool.indexOf(c) !== -1; });
+      if(availS.length < minSymbols) throw new Error('Not enough symbol characters available for minimum symbols setting.');
+    }
+    var required = [];
+    var sets = [[u, suit_UPPER], [l, suit_LOWER], [d, suit_DIGITS], [s, suit_SYMBOLS]];
+    for(var si = 0; si < sets.length; si++) {
+      var flag = sets[si][0], cs = sets[si][1];
+      if(flag) { var av = [...cs].filter(function(c) { return pool.indexOf(c) !== -1; }); if(av.length) required.push(av[suitCryptoRandom(av.length)]); }
+    }
+    if(startLetter && u) {
+      var avU = [...suit_UPPER].filter(function(c) { return pool.indexOf(c) !== -1; });
+      if(avU.length) required.push(avU[suitCryptoRandom(avU.length)]);
+    } else if(startLetter && l) {
+      var avL = [...suit_LOWER].filter(function(c) { return pool.indexOf(c) !== -1; });
+      if(avL.length) required.push(avL[suitCryptoRandom(avL.length)]);
+    }
+    for(var i = 0; i < minDigits && d; i++) {
+      var avD2 = [...suit_DIGITS].filter(function(c) { return pool.indexOf(c) !== -1; });
+      if(avD2.length) required.push(avD2[suitCryptoRandom(avD2.length)]);
+    }
+    for(var j = 0; j < minSymbols && s; j++) {
+      var avS2 = [...suit_SYMBOLS].filter(function(c) { return pool.indexOf(c) !== -1; });
+      if(avS2.length) required.push(avS2[suitCryptoRandom(avS2.length)]);
+    }
+    var req = required.slice(0, length);
+    var chars;
+    if(noRepeat) {
+      var used = new Set(req);
+      var rem = [...pool].filter(function(c) { return !used.has(c); });
+      var extra = [];
+      for(var k = 0; k < length - req.length; k++) { var idx = suitCryptoRandom(rem.length); extra.push(rem[idx]); rem.splice(idx, 1); }
+      chars = req.concat(extra);
+    } else {
+      chars = req.concat(Array.from({length: length - req.length}, function() { return pool[suitCryptoRandom(pool.length)]; }));
+    }
+    for(var m = chars.length - 1; m > 0; m--) { var jj = suitCryptoRandom(m + 1); var tmp = chars[m]; chars[m] = chars[jj]; chars[jj] = tmp; }
+    return chars.join('');
+  }
+
+  function suitGenPassphrase(wordCount, capitalize, withNum, separator) {
+    var words = [];
+    for(var i = 0; i < wordCount; i++) {
+      var kind = ['adj','noun','verb'][suitCryptoRandom(3)];
+      var w = kind === 'adj' ? suitRand(suit_ADJ) : kind === 'noun' ? suitRand(suit_NOUN) : suitRand(suit_VERB);
+      words.push(capitalize ? w[0].toUpperCase() + w.slice(1) : w);
+    }
+    var phrase = words.join(separator || '-');
+    if(withNum) phrase += String(suitCryptoRandom(1000)).padStart(3, '0');
+    return phrase;
+  }
+
+  function suitScoreStrength(pw) {
+    var score = 0;
+    if(pw.length >= 8) score++; if(pw.length >= 12) score++; if(pw.length >= 16) score++; if(pw.length >= 24) score++;
+    if(/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score++;
+    if(/\d/.test(pw)) score++;
+    if(/[^a-zA-Z0-9]/.test(pw)) score++;
+    score = Math.min(4, Math.round(score * 4 / 7));
+    return {label: ['Very Weak','Weak','Fair','Good','Strong'][score], color: ['var(--suit-vweak)','var(--suit-weak)','var(--suit-fair)','var(--suit-good)','var(--suit-strong)'][score], score: score};
+  }
+
+  function suitRenderPasswords() {
+    var lb = suitEl('suit-pw-listbox');
+    if(!lb) return;
+    lb.innerHTML = '';
+    if(!suitPasswords.length) {
+      var e = document.createElement('div');
+      e.className = 'suit-listbox-item';
+      e.style.color = 'var(--muted)';
+      e.textContent = 'Generate passwords to see them here.';
+      lb.appendChild(e);
+      return;
+    }
+    suitPasswords.forEach(function(item) {
+      var d = document.createElement('div');
+      d.className = 'suit-listbox-item';
+      d.style.justifyContent = 'space-between';
+      var s = document.createElement('span');
+      s.textContent = item.pw;
+      s.style.fontFamily = "'Inter', sans-serif";
+      s.style.fontSize = '13px';
+      s.style.flex = '1';
+      s.style.wordBreak = 'break-all';
+      d.appendChild(s);
+      if(item.cat) {
+        var b = document.createElement('span');
+        b.textContent = item.cat;
+        b.style.cssText = 'font-size:10px;padding:2px 7px;background:rgba(var(--accent-rgb),.15);border:1px solid rgba(var(--accent-rgb),.3);color:var(--accent);white-space:nowrap;flex-shrink:0;border-radius:999px;';
+        d.appendChild(b);
+      }
+      d.addEventListener('click', function() { suitCopyText(item.pw, 'Copied!'); });
+      lb.appendChild(d);
+    });
+  }
+
+  function suitGenPasswords() {
+    var modeEl = document.querySelector('input[name="suit-pw-mode"]:checked');
+    var mode = modeEl ? modeEl.value : 'random';
+    suitPasswords = [];
+    if(mode === 'passphrase') {
+      var wc = parseInt(suitVal('suit-pw-wordcount', '4'), 10) || 4;
+      var ct = parseInt(suitVal('suit-pw-ppcount', '5'), 10) || 5;
+      var cap = suitChecked('suit-pw-pp-capitalize');
+      var num = suitChecked('suit-pw-pp-numbers');
+      var sep = suitVal('suit-pw-pp-sep', '-') || '-';
+      var pcat = suitVal('suit-pw-pp-category', '');
+      try {
+        for(var i = 0; i < ct; i++) {
+          suitPasswords.push({ pw: suitGenPassphrase(wc, cap, num, sep), cat: pcat || null });
+        }
+      } catch(e) { suitToast(e.message, 'var(--danger)'); return; }
+      suitRenderPasswords();
+      var ppw = suitPasswords[suitPasswords.length - 1].pw;
+      var sc = suitScoreStrength(ppw);
+      var sl2 = suitEl('suit-pw-strength-lbl');
+      if(sl2) { sl2.textContent = 'Strength: ' + sc.label; sl2.style.color = sc.color; }
+      var sf2 = suitEl('suit-pw-strength-fill');
+      if(sf2) { sf2.style.width = (sc.score / 4 * 100) + '%'; sf2.style.background = sc.color; }
+      return;
+    }
+    var length = parseInt(suitVal('suit-pw-length', '16'), 10) || 16;
+    var count = parseInt(suitVal('suit-pw-count', '5'), 10) || 5;
+    var u = suitChecked('suit-pw-upper');
+    var l = suitChecked('suit-pw-lower');
+    var d = suitChecked('suit-pw-digits');
+    var s = suitChecked('suit-pw-symbols');
+    var aa = suitChecked('suit-pw-noambig');
+    var nr = suitChecked('suit-pw-norepeat');
+    var ex = suitVal('suit-pw-exclude', '');
+    var sl = suitChecked('suit-pw-startletter');
+    var md = parseInt(suitVal('suit-pw-mindigits', '0'), 10) || 0;
+    var ms = parseInt(suitVal('suit-pw-minsymbols', '0'), 10) || 0;
+    var pre = suitVal('suit-pw-prefix', '') || '';
+    var suf = suitVal('suit-pw-suffix', '') || '';
+    var cat = suitVal('suit-pw-category', '');
+    try {
+      for(var j = 0; j < count; j++) {
+        var genpw = suitGenPassword(length, u, l, d, s, aa, nr, ex, sl, md, ms);
+        suitPasswords.push({ pw: pre + genpw + suf, cat: cat || null });
+      }
+    } catch(e) { suitToast(e.message, 'var(--danger)'); return; }
+    suitRenderPasswords();
+    var lastpw = suitPasswords[suitPasswords.length - 1].pw;
+    var scoreObj = suitScoreStrength(lastpw);
+    var sLbl = suitEl('suit-pw-strength-lbl');
+    if(sLbl) { sLbl.textContent = 'Strength: ' + scoreObj.label; sLbl.style.color = scoreObj.color; }
+    var sFill = suitEl('suit-pw-strength-fill');
+    if(sFill) { sFill.style.width = (scoreObj.score / 4 * 100) + '%'; sFill.style.background = scoreObj.color; }
+  }
+
+  function suitCopyAllPasswords() {
+    if(!suitPasswords.length) { suitToast('Generate passwords first.', 'var(--danger)'); return; }
+    suitCopyText(suitPasswords.map(function(p) { return p.pw; }).join('\n'), 'Copied all!');
+  }
+
+  function suitSavePasswords() {
+    if(!suitPasswords.length) { suitToast('Nothing to save.', 'var(--danger)'); return; }
+    var ts = new Date().toISOString().replace('T', ' ').slice(0, 19);
+    var lines = suitPasswords.map(function(p) { return p.pw + (p.cat ? ' [' + p.cat + ']' : ''); }).join('\n');
+    var text = 'Generated: ' + ts + '\n' + '-' + '-'.repeat(30) + '\n' + lines;
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], {type: 'text/plain'}));
+    a.download = 'passwords.txt';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    suitToast('Saved passwords.txt');
+  }
+
+  function suitClearPasswords() {
+    suitPasswords = [];
+    suitRenderPasswords();
+    var sLbl = suitEl('suit-pw-strength-lbl');
+    if(sLbl) sLbl.textContent = '';
+    var sFill = suitEl('suit-pw-strength-fill');
+    if(sFill) sFill.style.width = '0';
+  }
+
+  /* ── username generation ── */
+  function suitApplyStyle(parts, style) {
+    switch(style) {
+      case 'CamelCase':
+      case 'pascal': return parts.map(function(w) { return w[0].toUpperCase() + w.slice(1); }).join('');
+      case 'camel': return parts.map(function(w, i) { return i === 0 ? w.toLowerCase() : w[0].toUpperCase() + w.slice(1); }).join('');
+      case 'snake_case':
+      case 'snake': return parts.join('_');
+      case 'kebab-case':
+      case 'kebab': return parts.join('-');
+      case 'flat': return parts.join('');
+      case 'SCREAMING': return parts.map(function(w) { return w.toUpperCase(); }).join('_');
+      case 'lower': return parts.join('').toLowerCase();
+      default: return parts.join('');
+    }
+  }
+
+  function suitGenUsername(pattern, style, withNum, numType, separator, prefix, suffix, minLen) {
+    var pat = pattern;
+    if(pat === 'random') pat = ['adj_noun','adj_noun_verb','noun_noun','adj_verb','verb_noun'][suitCryptoRandom(5)];
+    var parts;
+    switch(pat) {
+      case 'adj_noun': parts = [suitRand(suit_ADJ), suitRand(suit_NOUN)]; break;
+      case 'adj_verb': parts = [suitRand(suit_ADJ), suitRand(suit_VERB)]; break;
+      case 'noun_noun': parts = [suitRand(suit_NOUN), suitRand(suit_NOUN)]; break;
+      case 'verb_noun': parts = [suitRand(suit_VERB), suitRand(suit_NOUN)]; break;
+      case 'adj_noun_verb': parts = [suitRand(suit_ADJ), suitRand(suit_NOUN), suitRand(suit_VERB)]; break;
+      default: parts = [suitRand(suit_ADJ), suitRand(suit_NOUN)];
+    }
+    var name;
+    if(separator) {
+      name = parts.join(separator);
+      if(style === 'CamelCase' || style === 'pascal') name = parts.map(function(w) { return w[0].toUpperCase() + w.slice(1); }).join(separator);
+      if(style === 'camel') name = parts.map(function(w, i) { return i === 0 ? w.toLowerCase() : w[0].toUpperCase() + w.slice(1); }).join(separator);
+      if(style === 'SCREAMING') name = parts.map(function(w) { return w.toUpperCase(); }).join(separator);
+      if(style === 'lower' || style === 'lowercase') name = name.toLowerCase();
+      if(style === 'snake' || style === 'snake_case') name = parts.join('_');
+      if(style === 'kebab' || style === 'kebab-case') name = parts.join('-');
+    } else {
+      name = suitApplyStyle(parts, style);
+    }
+    name = (prefix || '') + name + (suffix || '');
+    if(withNum) {
+      if(numType === 'random') { var digits = [2,3,4][suitCryptoRandom(3)]; name += String(Math.floor(Math.random() * Math.pow(10, digits))).padStart(digits, '0'); }
+      else if(numType === 'year') { name += String(1970 + suitCryptoRandom(55)); }
+      else if(numType === 'short') { name += String(suitCryptoRandom(100)).padStart(2, '0'); }
+    }
+    if(minLen > 0 && name.length < minLen) {
+      var pad = '_' + String(suitCryptoRandom(1000)).padStart(3, '0');
+      name = name + pad;
+    }
+    return name;
+  }
+
+  function suitRenderUsernames() {
+    var lb = suitEl('suit-un-listbox');
+    if(!lb) return;
+    lb.innerHTML = '';
+    if(!suitUsernames.length) {
+      var e = document.createElement('div');
+      e.className = 'suit-listbox-item';
+      e.style.color = 'var(--muted)';
+      e.textContent = 'Generate usernames to see them here.';
+      lb.appendChild(e);
+      return;
+    }
+    suitUsernames.forEach(function(name) {
+      var d = document.createElement('div');
+      d.className = 'suit-listbox-item';
+      d.textContent = '  ' + name;
+      d.addEventListener('click', function() { suitCopyText(name, 'Copied: ' + name); });
+      lb.appendChild(d);
+    });
+  }
+
+  function suitGenUsernames() {
+    var count = parseInt(suitVal('suit-un-count', '5'), 10) || 12;
+    var style = suitVal('suit-un-style', 'camel') || 'camel';
+    var pat = suitVal('suit-un-pattern', 'adj_noun') || 'adj_noun';
+    var withNum = suitChecked('suit-un-numbers');
+    var numDigits = parseInt(suitVal('suit-un-numdigits', '2'), 10) || 2;
+    var sep = suitVal('suit-un-separator', '') || '';
+    var pre = suitVal('suit-un-prefix', '') || '';
+    var suf = suitVal('suit-un-suffix', '') || '';
+    var minLen = parseInt(suitVal('suit-un-minlen', '0'), 10) || 0;
+    suitUsernames = Array.from({length: count}, function() {
+      var name = suitGenUsername(pat, style, false, 'random', sep, pre, suf, minLen);
+      if(withNum) {
+        name += String(Math.floor(Math.random() * Math.pow(10, numDigits))).padStart(numDigits, '0');
+      }
+      return name;
+    });
+    suitRenderUsernames();
+  }
+
+  function suitCopyAllUsernames() {
+    if(!suitUsernames.length) { suitToast('Generate usernames first.', 'var(--danger)'); return; }
+    suitCopyText(suitUsernames.join('\n'), 'Copied all!');
+  }
+
+  function suitSaveUsernames() {
+    if(!suitUsernames.length) { suitToast('Nothing to save.', 'var(--danger)'); return; }
+    var ts = new Date().toISOString().replace('T', ' ').slice(0, 19);
+    var text = 'Generated: ' + ts + '\n' + '-'.repeat(30) + '\n' + suitUsernames.join('\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], {type: 'text/plain'}));
+    a.download = 'usernames.txt';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    suitToast('Saved usernames.txt');
+  }
+
+  function suitClearUsernames() {
+    suitUsernames = [];
+    suitRenderUsernames();
+  }
+
+  /* ── PIN generation ── */
+  function suitApplyGrouping(str, size, sep) {
+    if(!size || size < 2 || !sep) return str;
+    var result = [];
+    for(var i = 0; i < str.length; i += size) result.push(str.slice(i, i + size));
+    return result.join(sep);
+  }
+
+  function suitGenPin(length, noRepeat, noSequential, format, groupSize, groupSep) {
+    var alphabet = format === 'hex' ? '0123456789abcdef' : '0123456789';
+    if(noRepeat && length > alphabet.length) throw new Error('Cannot make ' + length + '-char no-repeat ' + format + ' PIN with only ' + alphabet.length + ' characters.');
+    if(noSequential && format === 'hex') throw new Error('No sequential is not supported for hex format.');
+
+    if(format === 'palindrome') {
+      var half = Math.ceil(length / 2);
+      var halfStr = '';
+      if(noRepeat) {
+        var avail = [...alphabet];
+        for(var h = 0; h < half; h++) {
+          var hidx = suitCryptoRandom(avail.length);
+          halfStr += avail[hidx];
+          avail.splice(hidx, 1);
+        }
+      } else {
+        for(var h2 = 0; h2 < half; h2++) halfStr += alphabet[suitCryptoRandom(alphabet.length)];
+      }
+      var rev = halfStr.split('').reverse().join('');
+      var palindromePin = halfStr + rev.slice(length % 2);
+      return suitApplyGrouping(palindromePin, groupSize, groupSep);
+    }
+
+    var pinChars = [];
+    var availChars = [...alphabet];
+    if(noRepeat) {
+      for(var i = 0; i < length; i++) {
+        var idx = suitCryptoRandom(availChars.length);
+        pinChars.push(availChars[idx]);
+        availChars.splice(idx, 1);
+      }
+    } else {
+      for(var i2 = 0; i2 < length; i2++) {
+        pinChars.push(alphabet[suitCryptoRandom(alphabet.length)]);
+      }
+    }
+    if(noSequential) {
+      for(var i3 = 0; i3 < pinChars.length - 2; i3++) {
+        var seq = pinChars[i3] + pinChars[i3 + 1] + pinChars[i3 + 2];
+        if(seq === String(Number(pinChars[i3])) + String(Number(pinChars[i3]) + 1) + String(Number(pinChars[i3]) + 2)) {
+          return suitGenPin(length, noRepeat, noSequential, format, groupSize, groupSep);
+        }
+        if(seq === String(Number(pinChars[i3])) + String(Number(pinChars[i3]) - 1) + String(Number(pinChars[i3]) - 2)) {
+          return suitGenPin(length, noRepeat, noSequential, format, groupSize, groupSep);
+        }
+      }
+    }
+    return suitApplyGrouping(pinChars.join(''), groupSize, groupSep);
+  }
+
+  function suitGenPins() {
+    var length = parseInt(suitVal('suit-pin-length', '6'), 10) || 6;
+    var count = parseInt(suitVal('suit-pin-count', '5'), 10) || 5;
+    var noRepeat = suitChecked('suit-pin-norepeat');
+    var noSeq = suitChecked('suit-pin-noseq');
+    var format = suitVal('suit-pin-format', 'numeric') || 'numeric';
+    var groupSize = 0;
+    var groupVal = suitVal('suit-pin-group', 'none') || 'none';
+    if(groupVal !== 'none') groupSize = parseInt(groupVal, 10);
+    var groupSep = suitVal('suit-pin-grp-sep', ' ') || ' ';
+    var lb = suitEl('suit-pin-listbox');
+    if(!lb) return;
+    lb.innerHTML = '';
+    try {
+      for(var i = 0; i < count; i++) {
+        (function(pin) {
+          var d = document.createElement('div');
+          d.className = 'suit-listbox-item';
+          d.style.fontSize = '24px';
+          d.style.fontWeight = '700';
+          d.style.letterSpacing = '6px';
+          d.style.justifyContent = 'center';
+          d.textContent = pin;
+          d.addEventListener('click', function() { suitCopyText(pin, 'Copied: ' + pin); });
+          lb.appendChild(d);
+        })(suitGenPin(length, noRepeat, noSeq, format, groupSize, groupSep));
+      }
+    } catch(e) { suitToast(e.message, 'var(--danger)'); }
+  }
+
+  /* ── email ── */
+  function suitGenSingleEmail() {
+    if(suitActiveEmailProvider === 'guerrilla') {
+      suitFetchGuerrillaEmail();
+    } else if(suitActiveEmailProvider === 'maildrop') {
+      var name = 'user' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      suitEmailAddr = name + '@maildrop.cc';
+      var addrEl = suitEl('suit-email-addr');
+      if(addrEl) addrEl.value = suitEmailAddr;
+      var st = suitEl('suit-email-status');
+      if(st) st.textContent = 'Ready — mailbox: ' + name;
+      suitRefreshInbox();
+    } else if(suitActiveEmailProvider === 'tempmail') {
+      var name2 = 'user' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      suitEmailAddr = name2 + '@temp-mail.org';
+      var addrEl2 = suitEl('suit-email-addr');
+      if(addrEl2) addrEl2.value = suitEmailAddr;
+      var st2 = suitEl('suit-email-status');
+      if(st2) st2.textContent = 'Generated ' + suitEmailAddr;
+    }
+  }
+
+  function suitSelectProvider(id, btn) {
+    suitActiveEmailProvider = id;
+    var rootEl = suitEl('suit-root');
+    if(rootEl) rootEl.querySelectorAll('.suit-prov-btn').forEach(function(b) { b.classList.remove('active'); });
+    if(btn) btn.classList.add('active');
+    var addrEl = suitEl('suit-email-addr');
+    if(addrEl) addrEl.value = '';
+    var st = suitEl('suit-email-status');
+    if(st) st.textContent = 'Ready — tap New to generate an address';
+    var ib = suitEl('suit-inbox-body');
+    if(ib) ib.innerHTML = '';
+    var mb = suitEl('suit-msg-body');
+    if(mb) mb.textContent = 'Select a message to read it.';
+    suitEmailAddr = '';
+    suitEmailInbox = [];
+  }
+
+  function suitFetchGuerrillaEmail() {
+    var status = suitEl('suit-email-status');
+    if(status) status.textContent = 'Generating Guerrilla Mail...';
+    fetch('https://api.guerrillamail.com/ajax.php?f=get_email_address&ip=127.0.0.1&agent=SakurasSuit')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        suitEmailAddr = data.email_addr;
+        var addrEl = suitEl('suit-email-addr');
+        if(addrEl) addrEl.value = suitEmailAddr;
+        if(status) status.textContent = 'Ready — email: ' + suitEmailAddr;
+        suitRefreshInbox();
+      })
+      .catch(function(err) {
+        if(status) status.textContent = 'Error: ' + (err.message || 'Failed');
+      });
+  }
+
+  function suitRefreshInbox() {
+    var status = suitEl('suit-email-status');
+    if(!suitEmailAddr) { suitToast('Generate an email address first.', 'var(--suit-weak)'); return; }
+    if(status) status.textContent = 'Fetching inbox...';
+    if(suitActiveEmailProvider === 'guerrilla') {
+      var addr = encodeURIComponent(suitEmailAddr);
+      fetch('https://api.guerrillamail.com/ajax.php?f=get_email_list&email=' + addr)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          suitEmailInbox = (data.list || []).map(function(m) {
+            return { id: m.mail_id, from: m.mail_from || 'Unknown', subject: m.mail_subject || '(No Subject)', date: m.mail_date || '', body: m.mail_body || m.mail_text || '' };
+          });
+          suitRenderInbox();
+          if(status) status.textContent = suitEmailInbox.length + ' message(s) — email: ' + suitEmailAddr;
+        })
+        .catch(function(err) {
+          if(status) status.textContent = 'Error: ' + (err.message || 'Failed');
+        });
+    } else if(suitActiveEmailProvider === 'maildrop') {
+      var name = suitEmailAddr.split('@')[0];
+      fetch('https://api.maildrop.cc/v2/mailbox/' + encodeURIComponent(name))
+        .then(function(r) { if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(function(data) {
+          suitEmailInbox = (data.messages || []).map(function(m) {
+            return { id: m._id || m.id, from: m.from || 'Unknown', subject: m.subject || '(No Subject)', date: m.date || '', body: '' };
+          });
+          suitRenderInbox();
+          if(status) status.textContent = suitEmailInbox.length + ' message(s) — email: ' + suitEmailAddr;
+        })
+        .catch(function(err) {
+          if(status) status.textContent = 'Inbox empty or unavailable — ' + (err.message || '');
+          var ib = suitEl('suit-inbox-body');
+          if(ib) ib.innerHTML = '<tr><td colspan="3" style="padding:20px;text-align:center;color:var(--muted)">No messages</td></tr>';
+        });
+    } else {
+      if(status) status.textContent = 'Inbox check not available for this provider.';
+    }
+  }
+
+  function suitRenderInbox() {
+    var tbody = suitEl('suit-inbox-body');
+    if(!tbody) return;
+    if(!suitEmailInbox.length) {
+      tbody.innerHTML = '<tr><td colspan="3" style="padding:20px;text-align:center;color:var(--muted)">No messages yet</td></tr>';
+      return;
+    }
+    tbody.innerHTML = suitEmailInbox.map(function(m) {
+      return '<tr data-suit-action="read-msg" data-suit-msg="' + suitEsc(m.id) + '" style="cursor:pointer"><td>' + suitEsc(m.from) + '</td><td>' + suitEsc(m.subject) + '</td><td>' + suitEsc(m.date || '') + '</td></tr>';
+    }).join('');
+  }
+
+  function suitReadMessage(id) {
+    var msgDiv = suitEl('suit-msg-body');
+    if(!msgDiv) return;
+    if(suitActiveEmailProvider === 'guerrilla') {
+      fetch('https://api.guerrillamail.com/ajax.php?f=fetch_email&email=' + encodeURIComponent(suitEmailAddr) + '&seq=1')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var msgs = data.list || [];
+          var found = msgs.find(function(m) { return String(m.mail_id) === String(id); });
+          if(found) {
+            msgDiv.textContent = found.mail_body || found.mail_text || '(Empty body)';
+          } else {
+            msgDiv.textContent = 'Select a message to read it.';
+          }
+        })
+        .catch(function() { msgDiv.textContent = 'Could not fetch message body.'; });
+    } else if(suitActiveEmailProvider === 'maildrop') {
+      var name = suitEmailAddr.split('@')[0];
+      fetch('https://api.maildrop.cc/v2/mailbox/' + encodeURIComponent(name) + '/messages/' + encodeURIComponent(id))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          msgDiv.textContent = data.body || data.text || '(Empty body)';
+        })
+        .catch(function() { msgDiv.textContent = 'Could not fetch message body.'; });
+    } else {
+      msgDiv.textContent = 'Message body viewer not available for this provider.';
+    }
+  }
+
+  function suitCopyEmailAddr() {
+    if(!suitEmailAddr) { suitToast('No email address generated.', 'var(--suit-weak)'); return; }
+    suitCopyText(suitEmailAddr, 'Copied email!');
+  }
+
+  function suitGenBulk() {
+    var count = parseInt(suitVal('suit-bulk-count', '5'), 10) || 5;
+    var progress = suitEl('suit-bulk-progress');
+    var lb = suitEl('suit-bulk-listbox');
+    var status = suitEl('suit-bulk-status');
+    if(!lb || !progress || !status) return;
+    lb.innerHTML = '';
+    suitEmailBulk = [];
+    status.textContent = 'Generating...';
+    progress.max = count;
+    progress.value = 0;
+    var genCount = 0;
+    function genNext() {
+      if(genCount >= count) {
+        status.textContent = 'Generated ' + count + ' addresses.';
+        suitRenderBulkList();
+        return;
+      }
+      var name = 'bulk' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6) + genCount;
+      suitEmailBulk.push(name + '@' + (suitActiveEmailProvider === 'guerrilla' ? 'guerrillamail.com' : 'maildrop.cc'));
+      genCount++;
+      progress.value = genCount;
+      setTimeout(genNext, 100);
+    }
+    genNext();
+  }
+
+  function suitRenderBulkList() {
+    var lb = suitEl('suit-bulk-listbox');
+    if(!lb) return;
+    lb.innerHTML = '';
+    suitEmailBulk.forEach(function(addr) {
+      var d = document.createElement('div');
+      d.className = 'suit-listbox-item';
+      d.textContent = '  ' + addr;
+      d.addEventListener('click', function() { suitCopyText(addr, 'Copied!'); });
+      lb.appendChild(d);
+    });
+  }
+
+  function suitCopyBulkAddrs() {
+    if(!suitEmailBulk.length) { suitToast('Generate addresses first.', 'var(--suit-weak)'); return; }
+    suitCopyText(suitEmailBulk.join('\n'), 'Copied all!');
+  }
+
+  function suitClearBulk() {
+    suitEmailBulk = [];
+    var lb = suitEl('suit-bulk-listbox');
+    if(lb) lb.innerHTML = '';
+    var progress = suitEl('suit-bulk-progress');
+    if(progress) progress.value = 0;
+    var status = suitEl('suit-bulk-status');
+    if(status) status.textContent = 'Ready';
+  }
+
+  /* ── vault (KeePass .kdbx) ── */
+  function suitEnsureKdbx(cb) {
+    if(typeof kdbxweb !== 'undefined') { cb(); return; }
+    if(!suitKdbxPromise) {
+      suitKdbxPromise = new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/kdbxweb@2.1.1/dist/kdbxweb.min.js';
+        s.onload = resolve;
+        s.onerror = function() { suitKdbxPromise = null; reject(new Error('kdbxweb load failed')); };
+        document.head.appendChild(s);
+      });
+    }
+    suitKdbxPromise.then(cb).catch(function() {
+      suitToast('Failed to load vault library. Check your connection.', 'var(--danger)');
+    });
+  }
+
+  function suitCreateNewVault() {
+    var pwEl = suitEl('suit-vault-pw-input');
+    var pw = pwEl ? pwEl.value : '';
+    if(!pw) { suitToast('Enter a master password.', 'var(--suit-weak)'); return; }
+    if(typeof kdbxweb === 'undefined') { suitToast('Loading vault library…', 'var(--suit-weak)'); suitEnsureKdbx(suitCreateNewVault); return; }
+    try {
+      var credentials = new kdbxweb.Credentials(kdbxweb.ProtectedValue.fromString(pw));
+      suitKdbxDb = kdbxweb.Kdbx.create(credentials, "Sakura's Suit Vault");
+      suitKdbxFileName = 'vault.kdbx';
+      var msg = suitEl('suit-vault-msg');
+      if(msg) msg.textContent = 'New vault created. Add entries and save.';
+      suitToast('New vault created!');
+      suitUnlockVaultUI();
+    } catch(e) {
+      suitToast('Error: ' + e.message, 'var(--danger)');
+    }
+  }
+
+  function suitLoadVaultFile(input) {
+    var file = input.files[0];
+    if(!file) return;
+    var pwEl = suitEl('suit-vault-pw-input');
+    var pw = pwEl ? pwEl.value : '';
+    if(!pw) { suitToast('Enter the master password.', 'var(--suit-weak)'); return; }
+    if(typeof kdbxweb === 'undefined') { suitToast('Loading vault library…', 'var(--suit-weak)'); suitEnsureKdbx(function() { suitLoadVaultFile(input); }); return; }
+    var msg = suitEl('suit-vault-msg');
+    if(msg) msg.textContent = 'Decrypting...';
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        var arr = new Uint8Array(e.target.result);
+        var credentials = new kdbxweb.Credentials(kdbxweb.ProtectedValue.fromString(pw));
+        kdbxweb.Kdbx.load(arr, credentials).then(function(db) {
+          suitKdbxDb = db;
+          suitKdbxFile = file;
+          suitKdbxFileName = file.name;
+          if(msg) msg.textContent = '';
+          suitToast('Vault unlocked: ' + file.name);
+          suitUnlockVaultUI();
+        }).catch(function(err) {
+          suitToast('Wrong password or corrupt file.', 'var(--danger)');
+          if(msg) msg.textContent = 'Decryption failed: ' + (err.message || 'wrong password');
+        });
+      } catch(err) {
+        suitToast('Error: ' + err.message, 'var(--danger)');
+        if(msg) msg.textContent = 'Error: ' + err.message;
+      }
+    };
+    reader.readAsArrayBuffer(file);
+    input.value = '';
+  }
+
+  function suitUnlockVaultUI() {
+    var locked = suitEl('suit-vault-locked');
+    var unlocked = suitEl('suit-vault-unlocked');
+    if(locked) locked.style.display = 'none';
+    if(unlocked) unlocked.style.display = 'block';
+    suitRefreshVaultList();
+  }
+
+  function suitLockVault() {
+    suitKdbxDb = null;
+    suitKdbxFile = null;
+    suitVaultEntries = [];
+    suitSelectedEntry = null;
+    var locked = suitEl('suit-vault-locked');
+    var unlocked = suitEl('suit-vault-unlocked');
+    if(locked) locked.style.display = 'block';
+    if(unlocked) unlocked.style.display = 'none';
+    var pwEl = suitEl('suit-vault-pw-input');
+    if(pwEl) pwEl.value = '';
+    suitToast('Vault locked.');
+  }
+
+  function suitRefreshVaultList() {
+    if(!suitKdbxDb) return;
+    var search = suitEl('suit-vault-search');
+    var query = search ? search.value.toLowerCase().trim() : '';
+    var entries = [];
+    suitKdbxDb.groups.forEach(function(group) {
+      group.entries.forEach(function(entry) {
+        var title = entry.fields.get('Title') || '';
+        var userName = entry.fields.get('UserName') || '';
+        var password = entry.fields.get('Password');
+        var url = entry.fields.get('URL') || '';
+        var notes = entry.fields.get('Notes') || '';
+        entries.push({ group: group, entry: entry, title: title, userName: userName, password: password, url: url, notes: notes, id: title + userName + url });
+      });
+    });
+    var filtered = query ? entries.filter(function(e) { return e.title.toLowerCase().indexOf(query) !== -1 || e.userName.toLowerCase().indexOf(query) !== -1 || e.url.toLowerCase().indexOf(query) !== -1; }) : entries;
+    suitVaultEntries = filtered;
+
+    var sidebar = suitEl('suit-vault-sidebar');
+    if(sidebar) {
+      var groups = [];
+      suitKdbxDb.groups.forEach(function(g) { groups.push(g.name); });
+      sidebar.innerHTML = groups.map(function(g, i) {
+        return '<button class="suit-cat-btn' + (i === 0 ? ' active' : '') + '" data-suit-action="filter-cat" data-suit-cat="' + i + '">' + suitEsc(g) + '</button>';
+      }).join('');
+    }
+
+    var tbody = suitEl('suit-vault-table-body');
+    if(!tbody) return;
+    if(!filtered.length) {
+      tbody.innerHTML = '<tr><td colspan="3" style="padding:20px;text-align:center;color:var(--muted);font-family:\'Inter\', sans-serif">No entries</td></tr>';
+      var stats = suitEl('suit-vault-stats');
+      if(stats) stats.textContent = '0 entries';
+      return;
+    }
+    tbody.innerHTML = filtered.map(function(e, i) {
+      return '<tr data-suit-action="select-entry" data-suit-entry="' + i + '" style="cursor:pointer">'
+        + '<td style="padding:10px;border-bottom:1px solid var(--suit-border);font-family:\'Inter\', sans-serif;font-size:13px">' + suitEsc(e.title) + '</td>'
+        + '<td style="padding:10px;border-bottom:1px solid var(--suit-border);font-family:\'Inter\', sans-serif;font-size:13px">' + suitEsc(e.userName) + '</td>'
+        + '<td style="padding:10px;border-bottom:1px solid var(--suit-border);font-family:\'Inter\', sans-serif;font-size:13px">' + suitEsc(e.group.name) + '</td>'
+        + '</tr>';
+    }).join('');
+    var stats2 = suitEl('suit-vault-stats');
+    if(stats2) stats2.textContent = filtered.length + ' entries';
+  }
+
+  function suitFilterCategory(index, btn) {
+    var rootEl = suitEl('suit-root');
+    if(rootEl) rootEl.querySelectorAll('.suit-cat-btn').forEach(function(b) { b.classList.remove('active'); });
+    if(btn) btn.classList.add('active');
+    if(!suitKdbxDb) return;
+    var groups = [];
+    suitKdbxDb.groups.forEach(function(g) { groups.push(g); });
+    if(index >= groups.length) return;
+    var group = groups[index];
+    var searchEl = suitEl('suit-vault-search');
+    var query = (searchEl ? searchEl.value : '').toLowerCase().trim();
+    var entries = [];
+    group.entries.forEach(function(entry) {
+      var title = entry.fields.get('Title') || '';
+      var userName = entry.fields.get('UserName') || '';
+      var password = entry.fields.get('Password');
+      var url = entry.fields.get('URL') || '';
+      var notes = entry.fields.get('Notes') || '';
+      entries.push({ group: group, entry: entry, title: title, userName: userName, password: password, url: url, notes: notes, id: title + userName + url });
+    });
+    var filtered = query ? entries.filter(function(e) { return e.title.toLowerCase().indexOf(query) !== -1 || e.userName.toLowerCase().indexOf(query) !== -1; }) : entries;
+    suitVaultEntries = filtered;
+    var tbody = suitEl('suit-vault-table-body');
+    if(!tbody) return;
+    tbody.innerHTML = filtered.map(function(e, i) {
+      return '<tr data-suit-action="select-entry" data-suit-entry="' + i + '" style="cursor:pointer">'
+        + '<td style="padding:10px;border-bottom:1px solid var(--suit-border);font-family:\'Inter\', sans-serif;font-size:13px">' + suitEsc(e.title) + '</td>'
+        + '<td style="padding:10px;border-bottom:1px solid var(--suit-border);font-family:\'Inter\', sans-serif;font-size:13px">' + suitEsc(e.userName) + '</td>'
+        + '<td style="padding:10px;border-bottom:1px solid var(--suit-border);font-family:\'Inter\', sans-serif;font-size:13px">' + suitEsc(e.group.name) + '</td>'
+        + '</tr>';
+    }).join('');
+  }
+
+  function suitSelectEntry(index) {
+    if(index >= suitVaultEntries.length) return;
+    var e = suitVaultEntries[index];
+    suitSelectedEntry = e;
+    var detail = suitEl('suit-vault-detail');
+    if(!detail) return;
+    var pwText = e.password ? e.password.getText() : '';
+    var maskedPw = pwText ? pwText.replace(/./g, '•') : '';
+    detail.innerHTML = ''
+      + '<div class="suit-detail-row"><div class="suit-detail-label">Title</div><div class="suit-detail-val">' + suitEsc(e.title) + '</div></div>'
+      + '<div class="suit-detail-row"><div class="suit-detail-label">Username</div><div class="suit-detail-val">' + suitEsc(e.userName) + ' <button class="suit-btn-ghost" data-suit-action="copy-detail" data-suit-copy="username" style="padding:2px 8px;min-height:28px;font-size:11px">Copy</button></div></div>'
+      + '<div class="suit-detail-row"><div class="suit-detail-label">Password</div><div class="suit-detail-val"><span class="suit-detail-pw" data-suit-action="reveal-pw" style="filter:blur(4px);cursor:pointer;transition:filter .2s" title="Click to reveal">' + suitEsc(maskedPw) + '</span> <button class="suit-btn-ghost" data-suit-action="copy-detail" data-suit-copy="password" style="padding:2px 8px;min-height:28px;font-size:11px">Copy</button></div></div>'
+      + '<div class="suit-detail-row"><div class="suit-detail-label">URL</div><div class="suit-detail-val">' + (e.url ? '<a href="' + suitEsc(e.url) + '" target="_blank" style="color:var(--accent)">' + suitEsc(e.url) + '</a>' : '(none)') + '</div></div>'
+      + '<div class="suit-detail-row"><div class="suit-detail-label">Notes</div><div class="suit-detail-val">' + suitEsc(e.notes || '(none)') + '</div></div>'
+      + '<div class="suit-detail-row" style="margin-top:16px;display:flex;gap:8px;">'
+      + '<button class="suit-btn-sm" data-suit-action="edit-entry" data-suit-edit="' + index + '">Edit</button>'
+      + '<button class="suit-btn-ghost" data-suit-action="delete-entry" data-suit-del="' + index + '" style="color:var(--danger);border-color:rgba(var(--danger-rgb),0.3)">Delete</button>'
+      + '</div>';
+  }
+
+  function suitCopyDetail(which) {
+    if(!suitSelectedEntry) return;
+    var txt = which === 'password' ? (suitSelectedEntry.password ? suitSelectedEntry.password.getText() : '') : suitSelectedEntry.userName;
+    suitCopyText(txt, which === 'password' ? 'Copied password' : 'Copied username');
+  }
+
+  function suitOpenAddEntry() {
+    SuitditingEntry = null;
+    var t = suitEl('suit-modal-title');
+    if(t) t.textContent = 'New Entry';
+    var titleEl = suitEl('suit-ent-title');
+    if(titleEl) titleEl.value = '';
+    var userEl = suitEl('suit-ent-username');
+    if(userEl) userEl.value = '';
+    var pwEl = suitEl('suit-ent-pw');
+    if(pwEl) pwEl.value = '';
+    var urlEl = suitEl('suit-ent-url');
+    if(urlEl) urlEl.value = '';
+    var notesEl = suitEl('suit-ent-notes');
+    if(notesEl) notesEl.value = '';
+    var groupEl = suitEl('suit-ent-group');
+    if(groupEl) groupEl.value = '';
+    var modal = suitEl('suit-entry-modal');
+    if(modal) modal.classList.add('open');
+  }
+
+  function suitOpenEditEntry(index) {
+    if(index >= suitVaultEntries.length) return;
+    var e = suitVaultEntries[index];
+    SuitditingEntry = index;
+    var t = suitEl('suit-modal-title');
+    if(t) t.textContent = 'Edit Entry';
+    var titleEl = suitEl('suit-ent-title');
+    if(titleEl) titleEl.value = e.title;
+    var userEl = suitEl('suit-ent-username');
+    if(userEl) userEl.value = e.userName;
+    var pwEl = suitEl('suit-ent-pw');
+    if(pwEl) pwEl.value = e.password ? e.password.getText() : '';
+    var urlEl = suitEl('suit-ent-url');
+    if(urlEl) urlEl.value = e.url;
+    var notesEl = suitEl('suit-ent-notes');
+    if(notesEl) notesEl.value = e.notes || '';
+    var groupEl = suitEl('suit-ent-group');
+    if(groupEl) groupEl.value = e.group.name;
+    var modal = suitEl('suit-entry-modal');
+    if(modal) modal.classList.add('open');
+  }
+
+  function suitCloseEntryModal() {
+    var modal = suitEl('suit-entry-modal');
+    if(modal) modal.classList.remove('open');
+  }
+
+  function suitSaveEntry() {
+    var titleEl = suitEl('suit-ent-title');
+    var userEl = suitEl('suit-ent-username');
+    var pwEl = suitEl('suit-ent-pw');
+    var urlEl = suitEl('suit-ent-url');
+    var notesEl = suitEl('suit-ent-notes');
+    var groupEl = suitEl('suit-ent-group');
+    if(!titleEl || !userEl || !pwEl || !urlEl || !notesEl || !groupEl) return;
+    var title = titleEl.value.trim() || 'Untitled';
+    var userName = userEl.value.trim();
+    var pw = pwEl.value;
+    var url = urlEl.value.trim();
+    var notes = notesEl.value.trim();
+    var groupName = groupEl.value.trim() || 'Root';
+    if(!suitKdbxDb) { suitToast('No vault open.', 'var(--danger)'); return; }
+    try {
+      if(SuitditingEntry !== null && SuitditingEntry < suitVaultEntries.length) {
+        var e = suitVaultEntries[SuitditingEntry];
+        e.entry.fields.set('Title', title);
+        e.entry.fields.set('UserName', userName);
+        e.entry.fields.set('Password', kdbxweb.ProtectedValue.fromString(pw));
+        e.entry.fields.set('URL', url);
+        e.entry.fields.set('Notes', notes);
+        suitToast('Entry updated.');
+      } else {
+        var group = null;
+        suitKdbxDb.groups.forEach(function(g) { if(g.name === groupName) group = g; });
+        if(!group) { group = suitKdbxDb.createGroup(suitKdbxDb.getDefaultGroup(), groupName); }
+        var entry = suitKdbxDb.createEntry(group);
+        entry.fields.set('Title', title);
+        entry.fields.set('UserName', userName);
+        entry.fields.set('Password', kdbxweb.ProtectedValue.fromString(pw));
+        entry.fields.set('URL', url);
+        entry.fields.set('Notes', notes);
+        suitToast('Entry added.');
+      }
+      suitCloseEntryModal();
+      suitRefreshVaultList();
+    } catch(e) {
+      suitToast('Error: ' + e.message, 'var(--danger)');
+    }
+  }
+
+  function suitDeleteEntry(index) {
+    if(index >= suitVaultEntries.length) return;
+    suitConfirm('Delete entry "' + suitVaultEntries[index].title + '"?', function() {
+      try {
+        var entry = suitVaultEntries[index];
+        entry.entry.remove();
+        suitSelectedEntry = null;
+        suitRefreshVaultList();
+        var detail = suitEl('suit-vault-detail');
+        if(detail) detail.innerHTML = '<div style="color:var(--muted);font-size:12px;text-align:center;margin-top:40px;font-family:\'Inter\', sans-serif">Select an entry</div>';
+        suitToast('Entry deleted.');
+      } catch(err) { suitToast('Error: ' + err.message, 'var(--danger)'); }
+    });
+  }
+
+  function suitRevealPw(el) {
+    if(!el) return;
+    el.style.filter = 'none';
+    setTimeout(function() { el.style.filter = 'blur(4px)'; }, 3000);
+  }
+
+  function suitSaveVaultToFile() {
+    if(!suitKdbxDb) { suitToast('No vault open.', 'var(--danger)'); return; }
+    var msg = suitEl('suit-vault-msg');
+    if(msg) msg.textContent = 'Saving...';
+    suitKdbxDb.save().then(function(data) {
+      var blob = new Blob([data], {type: 'application/octet-stream'});
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = suitKdbxFileName;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      if(msg) msg.textContent = 'Saved to ' + suitKdbxFileName;
+      suitToast('Vault saved as ' + suitKdbxFileName);
+    }).catch(function(err) {
+      suitToast('Save error: ' + err.message, 'var(--danger)');
+      if(msg) msg.textContent = 'Save failed: ' + err.message;
+    });
+  }
+
+  function suitExportVaultJson() {
+    if(!suitKdbxDb) return;
+    var entries = [];
+    suitKdbxDb.groups.forEach(function(group) {
+      group.entries.forEach(function(entry) {
+        entries.push({
+          group: group.name,
+          title: entry.fields.get('Title') || '',
+          userName: entry.fields.get('UserName') || '',
+          password: entry.fields.get('Password') ? entry.fields.get('Password').getText() : '',
+          url: entry.fields.get('URL') || '',
+          notes: entry.fields.get('Notes') || ''
+        });
+      });
+    });
+    var json = JSON.stringify(entries, null, 2);
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([json], {type: 'application/json'}));
+    a.download = 'vault-export.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    suitToast('Exported vault-export.json');
+  }
+
+  function suitFillGenPassword() {
+    var pw = suitGenPassword(16, true, true, true, true, false, false, '', false, 0, 0);
+    var el = suitEl('suit-ent-pw');
+    if(el) el.value = pw;
+  }
+
+  function suitToggleEntPw() {
+    var el = suitEl('suit-ent-pw');
+    if(!el) return;
+    el.type = el.type === 'password' ? 'text' : 'password';
+  }
+
+  function suitTogglePwMode() {
+    var mode = document.querySelector('input[name="suit-pw-mode"]:checked');
+    var random = suitEl('suit-pw-random-settings');
+    var pass = suitEl('suit-pw-passphrase-settings');
+    if(!random || !pass) return;
+    random.style.display = mode && mode.value === 'random' ? 'block' : 'none';
+    pass.style.display = mode && mode.value === 'passphrase' ? 'block' : 'none';
+  }
+
+  /* ── tab switching ── */
+  function suitSwitchTab(name) {
+    var rootEl = suitEl('suit-root');
+    if(!rootEl) return;
+    rootEl.querySelectorAll('.suit-panel').forEach(function(p) { p.classList.remove('active'); });
+    rootEl.querySelectorAll('.suit-tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    var panel = rootEl.querySelector('#suit-panel-' + name);
+    if(panel) panel.classList.add('active');
+    var names = ['passwords','usernames','pins','email','vault'];
+    rootEl.querySelectorAll('.suit-tab-btn').forEach(function(b, i) { if(names[i] === name) b.classList.add('active'); });
+  }
+
+  function suitSwitchEmailSub(sub) {
+    var single = suitEl('suit-email-single');
+    var bulk = suitEl('suit-email-bulk');
+    if(single) single.style.display = sub === 'single' ? 'block' : 'none';
+    if(bulk) bulk.style.display = sub === 'bulk' ? 'block' : 'none';
+    var rootEl = suitEl('suit-root');
+    if(rootEl) rootEl.querySelectorAll('.suit-sub-tabbar .suit-tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    var btn = suitEl('suit-email-sub-' + sub);
+    if(btn) btn.classList.add('active');
+  }
+
+  /* ── wiring ── */
+  var root = suitEl('suit-root');
+  if(!root) return;
+
+  /* Delegated click handling for static + dynamically re-rendered content */
+  root.addEventListener('click', function(e) {
+    var el = e.target;
+    if(!el || !el.closest) return;
+    var t = el.closest('[data-suit-action]');
+    if(!t) return;
+    var action = t.getAttribute('data-suit-action');
+    switch(action) {
+      case 'tab': suitSwitchTab(t.getAttribute('data-suit-tab')); break;
+      case 'gen-passwords': suitGenPasswords(); break;
+      case 'copy-all-passwords': suitCopyAllPasswords(); break;
+      case 'save-passwords': suitSavePasswords(); break;
+      case 'clear-passwords': suitClearPasswords(); break;
+      case 'gen-usernames': suitGenUsernames(); break;
+      case 'copy-all-usernames': suitCopyAllUsernames(); break;
+      case 'save-usernames': suitSaveUsernames(); break;
+      case 'clear-usernames': suitClearUsernames(); break;
+      case 'gen-pins': suitGenPins(); break;
+      case 'select-provider': suitSelectProvider(t.getAttribute('data-suit-provider'), t); break;
+      case 'email-sub': suitSwitchEmailSub(t.getAttribute('data-suit-sub')); break;
+      case 'copy-email': suitCopyEmailAddr(); break;
+      case 'gen-email': suitGenSingleEmail(); break;
+      case 'refresh-inbox': suitRefreshInbox(); break;
+      case 'gen-bulk': suitGenBulk(); break;
+      case 'copy-bulk': suitCopyBulkAddrs(); break;
+      case 'clear-bulk': suitClearBulk(); break;
+      case 'new-vault': suitCreateNewVault(); break;
+      case 'add-entry': suitOpenAddEntry(); break;
+      case 'save-vault': suitSaveVaultToFile(); break;
+      case 'export-vault': suitExportVaultJson(); break;
+      case 'lock-vault': suitLockVault(); break;
+      case 'toggle-ent-pw': suitToggleEntPw(); break;
+      case 'fill-gen-pw': suitFillGenPassword(); break;
+      case 'close-modal': suitCloseEntryModal(); break;
+      case 'save-entry': suitSaveEntry(); break;
+      case 'read-msg': suitReadMessage(t.getAttribute('data-suit-msg')); break;
+      case 'filter-cat': suitFilterCategory(parseInt(t.getAttribute('data-suit-cat'), 10), t); break;
+      case 'select-entry': suitSelectEntry(parseInt(t.getAttribute('data-suit-entry'), 10)); break;
+      case 'copy-detail': suitCopyDetail(t.getAttribute('data-suit-copy')); break;
+      case 'reveal-pw': suitRevealPw(t); break;
+      case 'edit-entry': suitOpenEditEntry(parseInt(t.getAttribute('data-suit-edit'), 10)); break;
+      case 'delete-entry': suitDeleteEntry(parseInt(t.getAttribute('data-suit-del'), 10)); break;
+    }
+  });
+
+  /* Password mode radio toggle */
+  var pwModeRadios = root.querySelectorAll('input[name="suit-pw-mode"]');
+  for(var ri = 0; ri < pwModeRadios.length; ri++) pwModeRadios[ri].addEventListener('change', suitTogglePwMode);
+
+  /* Vault: file load, Enter-to-create, live search */
+  var vaultFileInput = suitEl('suit-vault-file-input');
+  if(vaultFileInput) vaultFileInput.addEventListener('change', function() { suitLoadVaultFile(this); });
+  var vaultPwInput = suitEl('suit-vault-pw-input');
+  if(vaultPwInput) vaultPwInput.addEventListener('keydown', function(e) { if(e.key === 'Enter') suitCreateNewVault(); });
+  var vaultSearch = suitEl('suit-vault-search');
+  if(vaultSearch) vaultSearch.addEventListener('input', suitRefreshVaultList);
+})();
+</script>
+
+<script>
+(function () {
+  'use strict';
+  var root = document.getElementById('script-hub');
+  if (!root) return;
+
+  var MAIN_SCRIPT_JSON = "\"--[[\\nSakura's Roblox exploit — paste into your executor\\n]]\\nloadstring(game:HttpGet(\\\"https://raw.githubusercontent.com/FaddedMarket/roblox-scripts/refs/heads/main/script%20hub/main.lua\\\"))()\"";
+
+  var SUPPORTED_GAMES_JSON = "[{\"name\":\"[UPD] Chicken Farm 🐣\",\"url\":\"https://www.roblox.com/games/137233438285284/Chicken-Farm\",\"status\":\"fully\"},{\"name\":\"Sneaker Resell Simulator\",\"url\":\"https://www.roblox.com/games/12991635726/Sneaker-Resell-Simulator\",\"status\":\"fully\"},{\"name\":\"Sneaker Resell Simulator Shoe Sniper\",\"url\":\"https://www.roblox.com/games/12991635726/Sneaker-Resell-Simulator\",\"status\":\"fully\"},{\"name\":\"⚡Ninja Legends\",\"url\":\"https://www.roblox.com/games/3956818381/Ninja-Legends\",\"status\":\"fully\"},{\"name\":\"[X2🏆]+1 Speed Keyboard Escape | Candy \\u0026 Chocolate\",\"url\":\"https://www.roblox.com/games/95082159892680/1-Speed-Keyboard-Escape-Candy-Chocolate\",\"status\":\"coming\"},{\"name\":\"[🌴🌴] Taxi Boss 🚖\",\"url\":\"https://www.roblox.com/games/7305309231/Taxi-Boss\",\"status\":\"coming\"},{\"name\":\"Animal Hospital (Anomaly) 🧪\",\"url\":\"https://www.roblox.com/games/78515283254292/Animal-Hospital\",\"status\":\"coming\"},{\"name\":\"Flee the Facility\",\"url\":\"https://www.roblox.com/games/893973440/Flee-the-Facility\",\"status\":\"coming\"},{\"name\":\"Murder Mystery 2\",\"url\":\"https://www.roblox.com/games/142823291/Murder-Mystery-2\",\"status\":\"coming\"},{\"name\":\"Sell Lemons 🍋\",\"url\":\"https://www.roblox.com/games/79268393072444/Sell-Lemons\",\"status\":\"coming\"},{\"name\":\"[SPIN🍀] Sneaker Square 👟\",\"url\":\"https://www.roblox.com/games/14426736742/Sneaker-Square\",\"status\":\"discontinued\"}]";
+
+  var SUPPORTED_EXECUTORS_JSON = "[{\"name\":\"MacSploit\",\"url\":\"https://www.raptor.fun/\",\"platform\":\"pc\"},{\"name\":\"Potassium\",\"url\":\"https://www.potassium.pro/\",\"platform\":\"pc\"},{\"name\":\"Volt\",\"url\":\"https://voltbz.net/\",\"platform\":\"pc\"},{\"name\":\"Wave\",\"url\":\"https://getwave.gg/\",\"platform\":\"pc\"},{\"name\":\"Codex\",\"url\":\"https://codex.lol/\",\"platform\":\"android\"},{\"name\":\"Delta\",\"url\":\"https://deltaexploits.gg/\",\"platform\":\"android\"},{\"name\":\"Vega X\",\"url\":\"https://www.vegax.gg/\",\"platform\":\"android\"},{\"name\":\"Delta\",\"url\":\"https://deltaexploits.gg/\",\"platform\":\"ios\"}]";
+
+  var CHANGELOG_JSON = "[{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-08-20\",\"changes\":[\"converted the whole UI to SakuraUI\",\"patched the UI for mobile — tappable/draggable top bar, swipe-to-scroll on every list (shop, inventory, blacklist), window auto-clamps to small screens\",\"reworked the treasure buying — now only buys a new treasure when the old one is actually dug up, in BOTH auto-dig modes (walk + teleport), then waits up to 3s for the new dig spot to spawn so the loop never deadlocks or wastes cash\",\"sped up the whole auto dig — inventory poll 8s → 3s, teleport delay 0.6s → 0.3s, post-dig wait 1s → 0.4s, outer loop waits 0.5s → 0.3s, E-spam delay 4 → 3\",\"widened dig anchor radius 150 → 300 — digs register way more reliably now\",\"fires the correct BuyTreasure remote at the right time — no more buying shovels when you wanted a dig more fixes nothing big\",\"slowed down everything to stop bans due to reports\"]},{\"version\":\"Sneaker Resell Simulator Shoe Sniper\",\"date\":\"2026-08-20\",\"changes\":[\"converted the whole UI to SakuraUI\",\"fixed the infinite hang when loading outside the market server — the old script waited forever for the market's Tables folder and froze the whole UI\",\"added a background poller (every 2s) — spots the market tables the moment you're in the market server and wires the sniper up on its own\",\"added an on-screen notification when it connects: \\\"market tables found\",\"sniper online\\\"\",\"guarded all 12 market-table touchpoints (scan, snipes, one-dollar mode, walk-buy modes, slot build, blacklist rebuild) — a missing table can never crash or hang it again\",\"result: one script you can load anywhere — lobby, main game, or market — it just starts working when the market is there more fixes nothing big\"]},{\"version\":\"UPD Chicken Farm 🐣\",\"date\":\"2026-08-20\",\"changes\":[\"converted the whole UI to SakuraUI\",\"added Redeem All Codes button — fires the game's redeem remote for every active code, 4/4 verified accepted live (THANKSFOR100K, 50MVisits, 666klikes, freecasssh!)\",\"removed the bottom stats bar (cash/eggs HUD) — cleaner screen, stats still print in console every 10s\",\"fixed tab icons to real lucide icons (zap / egg / rotate-cw) — were blank placeholders before\",\"baked the pink-violet preset (255,95,175 accent, blossoms, 38% transparency) straight into the library — the whole \\\"main\\\" look loads on any machine, no preset file needed\",\"fixed the settings gear icon + search icon in the top bar (were showing a cursor glyph)\",\"reordered the loader: customized build → obfuscated fallback → HTTP — the pink look always wins, works offline too\",\"kept all game logic byte-identical — same auto buy, merge, eggs, deposit, rebirth as before, just a new face more fixes nothing big\"]},{\"version\":\"⚡Ninja Legends\",\"date\":\"2026-08-20\",\"changes\":[\"converted the whole UI to SakuraUI\",\"fixed the GUI being completely dead on load — one-char bug (Library:new vs Library.new) crashed the window build instantly; menu now opens clean with all 6 tabs (Farming / Auto-Buy / Pet Stuff / Misc / Teleports / Credits)\",\"reworked Unlock Islands — it now walks through all 21 island unlock parts (Ancient Inferno → Inner Peace) so the server registers every touch and unlocks ALL islands, then ends you at the top-money sell circle — live-tested, works\",\"added a Toggle Popups button in the menu, synced with the P keybind — mobile players can hide/show stat + hoop popups without a keyboard\",\"kept all game logic identical — same boss farms, training loops, pet evolutions, code redeems as the original more fixes nothing big\"]},{\"version\":\"Main Loader\",\"date\":\"2026-08-10\",\"changes\":[\"Added support for [UPD] Chicken Farm 🐣\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-07-21\",\"changes\":[\"Rebranded everything from \\\"Fadded Market / FM\\\" to \\\"Sakura's Hub / Sakura\\\"\",\"Reworked shoe app auto buy — added strike retries with notifications\",\"Reworked full auto shoe app buy — added error tracking per shoe, backs off on failures\",\"Reworked auto dig — added shovel dropdown with real prices, buy shovel button, buy treasure button\",\"Added new treasure prices from game dump (Level1=$10K → BLOX=$25M)\",\"Added shovel info (Garden=$100K/+10% → Gold=$100M/+100%)\",\"Added buyNewTreasure() function to fire BuyTreasure remote\",\"Added stat labels (money, spent, bought, sold, treasures dug) to info tab\",\"Added serverhop + join-same-server buttons\",\"New UI layout\",\"Various fixes\"]},{\"version\":\"Sneaker Con Shoe Sniper\",\"date\":\"2026-05-29\",\"changes\":[\"Script rework\",\"Max buy system per shoe\",\"Config tab rework\",\"Cleaned up unused code\"]},{\"version\":\"Ninja Legends\",\"date\":\"2026-05-19\",\"changes\":[\"Added to Script Loader\"]},{\"version\":\"Sneaker Square\",\"date\":\"2026-05-19\",\"changes\":[\"Added to Script Loader (still working on it)\"]},{\"version\":\"Sneaker Con\",\"date\":\"2026-05-19\",\"changes\":[\"Fixed rarity buttons\",\"Fixed module caching\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-05-19\",\"changes\":[\"Fixed random nil error\",\"Fixed auto dig webhooks\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-05-18\",\"changes\":[\"Reworked shoe app auto buy\",\"Reworked full auto buy for shoe app\",\"Reworked auto dig for latest update\",\"Added new treasure support\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-05-14\",\"changes\":[\"Added walking auto buy\",\"Fixed walking auto buy\",\"Added fail system\",\"Fixed 13 reported issues\",\"Various reworks\",\"Adjustable speeds in settings\"]},{\"version\":\"Sneaker Con Shoe Sniper\",\"date\":\"2026-05-13\",\"changes\":[\"Added walking auto buy\",\"Added options to settings tab\"]},{\"version\":\"Sneaker Con Shoe Sniper\",\"date\":\"2026-05-12\",\"changes\":[\"Config system\",\"Added 1k lines of code\"]},{\"version\":\"Sneaker Con Shoe Sniper\",\"date\":\"2026-05-12\",\"changes\":[\"Added blacklist system\",\"Removed purchase verification webhook\"]},{\"version\":\"Sneaker Con Shoe Sniper\",\"date\":\"2026-05-11\",\"changes\":[\"Script rewrite\",\"Faster performance with caching\",\"Gambling in sell tab (fast list mode)\",\"Added 1k lines of code\"]},{\"version\":\"Sneaker Con Shoe Sniper\",\"date\":\"2026-05-11\",\"changes\":[\"Fixed overpay guard\",\"Fixed auto sell\",\"Fixed auto sell on unsellable\",\"Fixed sneaker module\",\"Fixed stocky integration\",\"Fixed refresh button in sell and list tabs\",\"New notification system\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-05-11\",\"changes\":[\"Fixed crashes\",\"Notification toggle in stats \\u0026 misc\",\"Black screen mode for long AFK\",\"Shoe buy counter on page load\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-05-09\",\"changes\":[\"Added shoe app tab\",\"Shoe app data pull button\",\"Auto spam buy for shoe drops\",\"Auto buy shoe drops under 60s in Full Automation\"]},{\"version\":\"Sneaker Con Shoe Sniper\",\"date\":\"2026-05-09\",\"changes\":[\"List tab with all shoes for sale and stock x prices\",\"Sell tab with click-to-sell at stock x or markup\",\"Fixed sell price toggle\",\"Auto buy in sell tab\",\"Persistent settings and webhook saving\",\"Table slot check\",\"Faster $1 shoe mode\",\"Stock x caching for speed\",\"Unsellable-only toggle\",\"Reduced lag\",\"Fixed crash on server change\",\"Renamed to Shoe Sniper\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-05-08\",\"changes\":[\"Removed risky auto dig and misc tabs\",\"Added stats tab\",\"Merged risky auto dig into auto dig tab\",\"Moved misc features to stats tab\",\"Fixed auto buy clicking into NPC\",\"Reworked webhook system\",\"Webhooks for semi automation\",\"Webhook and blacklist saving\",\"UI improvements\",\"Added support checker\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-05-06\",\"changes\":[\"Reworked webhook sending\",\"Improved detection system\",\"No-shoes detection no longer triggers during auto sell\",\"Removed unnecessary webhook detections\",\"Cleaner code structure\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-05-06\",\"changes\":[\"New webhook settings and detections\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-05-06\",\"changes\":[\"Remade auto sell - hits green bar more consistently\",\"Remade auto dig - checks plot ownership\",\"Remade risky auto dig - checks ownership\",\"Webhook improvements for full automation\",\"No more triple stopped popups\",\"Fail system for full automation\",\"Better auto sell NPC finder\",\"Moved socials to info tab\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-05-05\",\"changes\":[\"SRS V3 released!\",\"Removed main tab\",\"Added Semi Automation tab\",\"Full Automation (Buy + Sell Cycle)\",\"Fast, medium, and slow Full Automation modes\",\"Webhook button for Full Automation stats\",\"Reworked internals\",\"Fixed nil errors\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-05-01\",\"changes\":[\"Added mini game in misc tab for AFK\",\"Noclip toggle in auto dig tab\",\"Added info tab\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-04-25\",\"changes\":[\"Auto sell turns off when auto buy activates\",\"Auto buy modes no longer conflict with each other\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-04-24\",\"changes\":[\"Reworked auto buy\",\"Updated text and labels\",\"Added uptime timer\",\"Added FPS tracker\",\"Added ping tracker\",\"Updated info tab\",\"Changed anti AFK method\",\"Removed old anti AFK script\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-04-24\",\"changes\":[\"Added medium auto buy\",\"Code cleanup\",\"5s cooldown due to game AFK rework\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-04-23\",\"changes\":[\"Added fast auto buy from v1\",\"Added removal reason to info tab\",\"Rejoin server feature\",\"Updated auto buy blacklist\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-04-22\",\"changes\":[\"Added risky auto dig (TP instead of walk)\",\"Info tab with known issues and fixes\",\"Code cleanup for readability\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-03-28\",\"changes\":[\"Safer auto buy\",\"5s refresh delay, 0.5s buy delay\",\"24/7 stable operation\",\"Auto buy rewrite\"]},{\"version\":\"Script Loader\",\"date\":\"2026-03-20\",\"changes\":[\"Removed UI for faster loading\",\"Works with all executors\",\"Removed universal support\",\"Removed break a lucky block\"]},{\"version\":\"Sneaker Resell Simulator\",\"date\":\"2026-03-20\",\"changes\":[\"Added grail tables\",\"Tips and common fixes\",\"UI updates\",\"Auto buy: 1s refresh, 0.3s buy delay\"]}]";
+
+  var mainScript = '', supportedGames = [], supportedExecutors = [], changelogData = [];
+  try { mainScript = JSON.parse(MAIN_SCRIPT_JSON); } catch (e) {}
+  try { supportedGames = JSON.parse(SUPPORTED_GAMES_JSON); } catch (e) {}
+  try { supportedExecutors = JSON.parse(SUPPORTED_EXECUTORS_JSON); } catch (e) {}
+  try { changelogData = JSON.parse(CHANGELOG_JSON); } catch (e) {}
+
+  var scriptSubTab = 'script';
+  var searchQuery = '';
+  var contentEl = document.getElementById('script-hub-content');
+  var tabBtns = root.querySelectorAll('.script-tab-btn');
+
+  function esc(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+  function escAttr(s) {
+    return esc(s).replace(/"/g, '&quot;');
+  }
+
+  var statusMap = { fully: '🟢', partial: '🟡', broken: '🔴', coming: '🟣', discontinued: '⚫' };
+  var statusLabel = { fully: 'Completely Working', partial: 'Partially Working', broken: 'Not Working or Bugged', coming: 'Coming Out', discontinued: 'Discontinued' };
+
+  function buildGamesHtml(games) {
+    if (!games || !games.length) return '<div style="color:var(--muted);padding:14px;text-align:center;font-size:0.82rem">No games loaded yet.</div>';
+    return games.map(function (g) {
+      return '<div class="script-game-card"><span class="sg-name"><a href="' + esc(g.url) + '" target="_blank" rel="noopener">' + esc(g.name) + '</a></span><span class="sg-status">' + (statusMap[g.status] || '') + ' ' + esc(statusLabel[g.status] || '') + '</span></div>';
+    }).join('');
+  }
+
+  function buildExecutorsHtml(executors) {
+    if (!executors || !executors.length) return '<div style="color:var(--muted);padding:14px;text-align:center;font-size:0.82rem">No executors loaded yet.</div>';
+    var platformLabel = { pc: 'PC', android: 'Android', ios: 'iOS' };
+    return executors.map(function (e) {
+      var nameHtml = e.url ? '<a href="' + esc(e.url) + '" target="_blank" rel="noopener">' + esc(e.name) + '</a>' : esc(e.name);
+      var chip = '<span class="exe-chip exe-chip-' + (platformLabel[e.platform] ? esc(e.platform) : 'other') + '">' + (platformLabel[e.platform] || 'Other') + '</span>';
+      return '<div class="script-game-card"><span class="sg-name">' + nameHtml + '</span><span class="sg-status">' + chip + '</span></div>';
+    }).join('');
+  }
+
+  function renderScriptContent() {
+    var games = supportedGames || [];
+    if (searchQuery) {
+      var q = searchQuery.toLowerCase();
+      games = games.filter(function (g) { return (g.name || '').toLowerCase().indexOf(q) !== -1; });
+    }
+    var gamesHtml = games.length
+      ? buildGamesHtml(games)
+      : '<div style="color:var(--muted);padding:14px;text-align:center;font-size:0.82rem">No games match your search.</div>';
+
+    return "<h2>Sakura's Hub</h2>"
+      + '<p class="script-sub">Roblox cheat/exploit — paste into your executor</p>'
+      + '<p class="script-sub" style="font-size:0.7rem;color:var(--muted2);margin-top:-12px;margin-bottom:20px;">Only works with executors that have a high sUNC score. Check the score <a href="https://whatexpsare.online/" target="_blank" rel="noopener" style="color:#b388ff;text-decoration:underline">here</a> — click the sUNC button.</p>'
+      + '<div class="script-code-block">'
+      + '<button class="copy-btn">Copy</button>'
+      + '<button class="dl-btn">Download</button>'
+      + '<pre>' + esc(mainScript || '') + '</pre>'
+      + '</div>'
+      + '<div class="script-status-hdr">Script Status Overview</div>'
+      + '<div class="script-legend">'
+      + '<span class="sl-badge sl-fully">🟢 Completely Working</span>'
+      + '<span class="sl-badge sl-partial">🟡 Partially Working</span>'
+      + '<span class="sl-badge sl-broken">🔴 Not Working or Bugged</span>'
+      + '<span class="sl-badge sl-coming">🟣 Coming Out</span>'
+      + '<span class="sl-badge sl-discontinued">⚫ Discontinued</span>'
+      + '</div>'
+      + '<div class="script-status-hdr" style="margin-top:0">Supported Games</div>'
+      + '<input class="script-search" type="text" placeholder="Search games..." value="' + escAttr(searchQuery) + '">'
+      + '<div class="script-games" id="script-games-grid">' + gamesHtml + '</div>'
+      + '<div class="script-status-hdr" style="margin-top:0">Supported Executors</div>'
+      + '<div class="script-games">' + buildExecutorsHtml(supportedExecutors) + '</div>';
+  }
+
+  function renderFeaturesContent() {
+    function card(icon, title, desc) {
+      return '<div class="sf-card"><div class="sf-card-top"><div class="sf-card-icon">' + icon + '</div><div class="sf-card-title">' + title + '</div></div><div class="sf-card-desc">' + desc + '</div></div>';
+    }
+    function section(name, items) {
+      var cards = items.map(function (i) { return card(i[0], i[1], i[2]); }).join('');
+      return '<div class="sf-accordion">'
+        + '<div class="sf-acc-header">'
+        + name + '<span class="sf-acc-count">' + items.length + ' features</span><span class="sf-acc-arrow">▾</span></div>'
+        + '<div class="sf-acc-body"><div class="sf-grid">' + cards + '</div></div></div>';
+    }
+    return "<h2>Features</h2><p class=\"script-sub\">What each Sakura's script can do. Click a game to expand its features.</p>"
+      + section('Sneaker Resell Simulator', [
+        ['🔄', 'Full Automation', 'Complete buy + sell cycle. Runs 24/7 with slow, medium, and fast speeds. Includes auto-buy for shoe app drops.'],
+        ['🤖', 'Semi Automation', 'Individual auto buy (slow/medium/fast) and auto sell toggles. Run buy or sell separately.'],
+        ['📱', 'Shoe App Auto Buy', 'Watches for shoe drops and spams buy when they release. Standalone or inside Full Automation.'],
+        ['⛏️', 'Auto Dig', 'Digs for treasure at your plot. Risky mode teleports instead of walking.'],
+        ['🛒', 'PC Auto Buy', 'Auto buy for Player Catalog (PC) with slow, medium, and fast modes.'],
+        ['🔔', 'Webhook Alerts', 'Sends buy, sell, and session stats to Discord. Detection alerts for game close, disconnects, errors, FPS drops, ping spikes.'],
+        ['📊', 'Stats & Misc', 'Uptime, FPS, ping, notifications, black screen mode, noclip, flying, infinite jump, anti AFK.'],
+        ['📋', 'Blacklist', 'Blacklist shoes by rarity (Common through Grail). Settings save between sessions.'],
+      ])
+      + section('Sneaker Con Shoe Sniper', [
+        ['🔍', 'Scanner Modes', 'Snipe mode watches all tables. $1 mode buys cheap shoes. Walk-to-buy variants walk before buying.'],
+        ['📋', 'Shoe List', 'Shows every shoe for sale with stock x prices. Refresh to see current listings.'],
+        ['💰', 'Sell Tab', 'Sell shoes at stock x price or fixed price. Fast list mode for quick listings.'],
+        ['⚙️', 'Settings & Configs', 'Adjustable delays, price filters, stock y margin, overpay limit. Save/load config codes.'],
+        ['🚫', 'Blacklist & Max Buy', 'Blacklist specific shoes. Set per-shoe max buy prices.'],
+        ['📊', 'Stats', 'Money spent, shoes bought/sold, uptime, net profit. Webhook alerts on game close.'],
+      ])
+      + section('Ninja Legends', [
+        ['⚔️', 'Farming', 'Auto-Swing, Auto-Sell, Auto-Full Sell, Auto-Chi, Auto-Pet Levels.'],
+        ['👹', 'Boss Farming', 'Auto-Robot, Eternal, Ancient, Santa, or All bosses. Teleports and attacks automatically.'],
+        ['🛒', 'Auto Buy', 'Auto-Rank, Sword, Belt, Skills, Shurikens. Buys from every island.'],
+        ['🐾', 'Pet Stuff', 'Open crystals, Auto-Evolve, Eternalise, Immortalize, Legend, Elementalize. Sell by tier.'],
+        ['🛠️', 'Misc', 'Fast/Slow Shuriken, Invisibility, Collect All Chests, Unlock Islands, Max Jumps, ESP.'],
+        ['🗺️', 'Teleports', 'Any island, shop, skills shop, KOTH, training areas.'],
+      ])
+      + section('[UPD] Sneaker Square', [
+        ['💰', 'Auto Rob NPCs', 'Walks to plaza NPCs, holds rob prompt, collects money. Stuck detection and recovery.'],
+        ['📦', 'Auto Box Opener', 'Presses E on configurable delay to open nearby boxes while robbing.'],
+        ['🗺️', 'Zone System', 'Stays in plaza zone. Auto-walks you back if you leave. Progress bar shows rob status.'],
+      ]);
+  }
+
+  function renderChangelogContent() {
+    var entries = changelogData;
+    if (!entries || !entries.length) {
+      return '<div class="panel-empty"><h3>No changelog entries</h3><p>Check back later for updates.</p></div>';
+    }
+    var html = "<h2>Changelog</h2><p class=\"script-sub\">Recent updates and changes to Sakura's.</p>";
+    entries.forEach(function (entry) {
+      var date = entry.date ? new Date(entry.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+      html += '<div class="cl-entry">'
+        + '<div class="cl-version">' + esc(entry.version || 'Update') + '</div>'
+        + (date ? '<div class="cl-date">' + date + '</div>' : '')
+        + '<ul class="cl-changes">'
+        + (entry.changes || []).map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('')
+        + '</ul>'
+        + '</div>';
+    });
+    return html;
+  }
+
+  function render() {
+    var active = scriptSubTab;
+    for (var i = 0; i < tabBtns.length; i++) {
+      var b = tabBtns[i];
+      var on = b.getAttribute('data-script-subtab') === active;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    }
+    var html = active === 'changelog' ? renderChangelogContent()
+      : active === 'features' ? renderFeaturesContent()
+      : renderScriptContent();
+    contentEl.innerHTML = html;
+  }
+
+  function copyScript(btn) {
+    var code = mainScript || '--[[\nSakura\'s Roblox exploit — paste into your executor\n]]\nloadstring(game:HttpGet("https://raw.githubusercontent.com/FaddedMarket/roblox-scripts/refs/heads/main/script%20hub/main.lua"))()';
+    function done() {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = code;
+      ta.style.position = 'fixed'; ta.style.left = '-9999px'; ta.style.top = '-9999px';
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done).catch(fallback);
+      } else {
+        fallback();
+      }
+    } catch (e) { fallback(); }
+  }
+
+  function downloadScript() {
+    var code = mainScript || '--[[\nSakura\'s Roblox exploit — paste into your executor\n]]\nloadstring(game:HttpGet("https://raw.githubusercontent.com/FaddedMarket/roblox-scripts/refs/heads/main/script%20hub/main.lua"))()';
+    var blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'sakuras-hub.lua';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  root.addEventListener('click', function (e) {
+    var el = e.target;
+    while (el && el !== root) {
+      if (el.classList && el.classList.contains('script-tab-btn')) {
+        var tab = el.getAttribute('data-script-subtab');
+        if (tab && tab !== scriptSubTab) { scriptSubTab = tab; render(); }
+        return;
+      }
+      if (el.classList && el.classList.contains('copy-btn')) { copyScript(el); return; }
+      if (el.classList && el.classList.contains('dl-btn')) { downloadScript(); return; }
+      if (el.classList && el.classList.contains('sf-acc-header')) {
+        el.classList.toggle('open');
+        var body = el.nextElementSibling;
+        if (body) body.classList.toggle('open');
+        return;
+      }
+      el = el.parentNode;
+    }
+  });
+
+  root.addEventListener('input', function (e) {
+    if (e.target && e.target.classList && e.target.classList.contains('script-search')) {
+      searchQuery = e.target.value;
+      var grid = document.getElementById('script-games-grid');
+      if (grid) {
+        var games = supportedGames || [];
+        if (searchQuery) {
+          var q = searchQuery.toLowerCase();
+          games = games.filter(function (g) { return (g.name || '').toLowerCase().indexOf(q) !== -1; });
+        }
+        grid.innerHTML = games.length
+          ? buildGamesHtml(games)
+          : '<div style="color:var(--muted);padding:14px;text-align:center;font-size:0.82rem">No games match your search.</div>';
+      }
+    }
+  });
+
+  function init() {
+    render();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
